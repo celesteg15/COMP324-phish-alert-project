@@ -19,3 +19,11 @@ const difficulty = document.querySelector("#difficulty");
 const content = document.querySelector("#content");
 const feedback = document.querySelector("#feedback");
 
+function renderScenario(scenario) {
+    sender.textContent = scenario.sender;
+    subject.textContent = scenario.subject;
+    type.textContent = scenario.type;
+    difficulty.textContent = scenario.difficulty;
+    content.textContent = scenario.content;
+    feedback.textContent = "Submit your answer to see feedback.";
+}
