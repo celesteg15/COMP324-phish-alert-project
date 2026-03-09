@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PhishQuiz</title>
+<link rel="stylesheet" href="./styles.css" />
+</head>
+
+
+<body>
+  <main class="container">
+    <h1>PhishQuiz</h1>
+
+
+    <!-- Message Panel -->
+    <section class="card" aria-label="Message scenario">
+      <div class="meta">
+        <div><strong>From:</strong> <span id="sender">—</span></div>
+        <div><strong>Subject:</strong> <span id="subject">—</span></div>
+        <div><strong>Type:</strong> <span id="type">—</span></div>
+        <div><strong>Difficulty:</strong> <span id="difficulty">—</span></div>
+      </div>
+
+
+      <pre id="content" class="content">Loading...</pre>
+    </section>
+
+
+    <!-- Answer Buttons (render-only; no interaction yet) -->
+    <section class="actions" aria-label="Answer choices">
+      <button type="button" id="btn-phishing">Phishing</button>
+      <button type="button" id="btn-legitimate">Legitimate</button>
+    </section>
+
+
+    <!-- Submit (disabled for Commit 1) -->
+    <button type="button" id="btn-submit" disabled>Submit</button>
+
+
+    <!-- Feedback area (empty for Commit 1) -->
+    <section class="card" aria-label="Feedback">
+      <h2>Feedback</h2>
+      <div id="feedback" class="feedback">Submit your answer to see feedback.</div>
+    </section>
+  </main>
+
+
+  <script type="module" src="./app.js"></script>
+
+</body>
+
+</html>
