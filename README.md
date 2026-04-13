@@ -4,13 +4,12 @@ PhishQuiz is an interactive quiz app that helps users practice telling whether a
 ## How to run
 
 Start a local server from the project folder:
-
-```bash
-python3 -m http.server 5500
+`
+python3 -m http.server 5500`
 
 http://localhost:5500`
 
-## Module map
+# Module map
 The project currently includes these main files:
 - `index.html` — the main structure of the quiz page
 - `styles.css` — styling for the layout, buttons, cards, spacing, and text
@@ -34,7 +33,7 @@ The extracted component in the project is:
 // Output: DOM nodes mounted inside `container`
 // Events: onSelect(value) — called when user selects an answer
 // Dependencies: none
-
+```
 
 ## Resilience patterns applied
 The app currently uses these resilience patterns in the data-loading flow:
