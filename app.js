@@ -1,19 +1,5 @@
-const scenarios = [
-    {
-        sender: "loyola-support@secure-reset.com",
-        subject: "Urgent: Reset Your Password",
-        type: "Email",
-        difficulty: "Easy",
-        content:
-            "Your Loyola account has been flagged for suspicious activity. Click the link below immediately to verify your password or your account will be locked.",
-        answer: "phishing",
-        feedback:
-            "This is phishing because it uses urgency and a suspicious sender address that does not match Loyola's official domain.",
-        hint:
-            "Look closely at the sender domain and the urgent language asking you to act immediately."
-    }
-];
-
+const DATA_URL = "./data/scenarios.json";
+const LOAD_TIMEOUT_MS = 8000;
 
 const sender = document.querySelector("#sender");
 const subject = document.querySelector("#subject");
@@ -29,7 +15,9 @@ const submitButton = document.querySelector("#btn-submit");
 
 const hintBox = document.querySelector("#hint-box");
 const hintText = document.querySelector("#hint-text");
+const retryContainer = document.querySelector("#retry-container");
 
+let currentScenario = null;
 let hintVisible = false;
 let selectedAnswer = "";
 
@@ -40,6 +28,65 @@ function resetHint() {
     hintText.textContent = "";
 }
 
+function clearRetryButton() {
+    retryContainer.replaceChildren();
+}
+function showRetryButton() {
+    const retryButton = document.createElement("button");
+    retryButton.type = "button";
+    retryButton.textContent = "Retry";
+    retryButton.addEventListener("click", init);
+    retryContainer.replaceChildren(retryButton);
+}
+
+function renderLoadingState() {
+    currentScenario = null;
+    selectedAnswer = "";
+    submitButton.disabled = true;
+    hintButton.disabled = true;
+    resetHint();
+    clearRetryButton();
+
+    sender.textContent = "—";
+    subject.textContent = "—";
+    type.textContent = "—";
+    difficulty.textContent = "—";
+    content.textContent = "Loading quiz scenario...";
+    feedback.textContent = "Please wait while the scenarios load.";
+}
+
+function renderErrorState(message) {
+    currentScenario = null;
+    selectedAnswer = "";
+    submitButton.disabled = true;
+    hintButton.disabled = true;
+    resetHint();
+
+    sender.textContent = "—";
+    subject.textContent = "—";
+    type.textContent = "—";
+    difficulty.textContent = "—";
+    content.textContent = "Unable to load scenarios.";
+    feedback.textContent = message;
+
+    showRetryButton();
+}
+
+function renderEmptyState() {
+    currentScenario = null;
+    selectedAnswer = "";
+    submitButton.disabled = true;
+    hintButton.disabled = true;
+    resetHint();
+    clearRetryButton();
+
+    sender.textContent = "—";
+    subject.textContent = "—";
+    type.textContent = "—";
+    difficulty.textContent = "—";
+    content.textContent = "No quiz scenarios are available right now.";
+    feedback.textContent = "Add a scenario to scenarios.json and reload the page.";
+}
 function renderScenario(scenario) {
     sender.textContent = scenario.sender;
     subject.textContent = scenario.subject;
@@ -68,19 +115,115 @@ function toggleHint() {
 }
 
 function chooseAnswer(answer) {
+    if (!currentScenario) {
+        return;
+    }
+
     selectedAnswer = answer;
     submitButton.disabled = false;
 }
 
+
 function checkAnswer() {
-    const scenario = scenarios[0];
-    if (selectedAnswer === scenario.answer) {
-        feedback.textContent = scenario.feedback;
+    if (!currentScenario) {
+        return;
+    }
+
+    if (selectedAnswer === currentScenario.answer) {
+        feedback.textContent = currentScenario.feedback;
     } else {
         feedback.textContent = "That is not correct. Try again.";
     }
 }
 
+function validateScenarioFields(scenario, index) {
+    const requiredFields = [
+        "sender",
+        "subject",
+        "type",
+        "difficulty",
+        "content",
+        "answer",
+        "feedback"
+    ];
+
+    for (const field of requiredFields) {
+        if (typeof scenario[field] !== "string" || scenario[field].trim() === "") {
+            throw new Error(`Scenario ${index + 1} is missing a valid ${field}.`);
+        }
+    }
+}
+
+function validateScenarios(data) {
+    if (!Array.isArray(data)) {
+        throw new Error("The JSON file must contain an array of scenarios.");
+    }
+
+    for (let i = 0; i < data.length; i += 1) {
+        validateScenarioFields(data[i], i);
+    }
+}
+
+async function fetchWithTimeout(url, timeoutMs) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(function () {
+        controller.abort();
+    }, timeoutMs);
+
+    try {
+        return await fetch(url, { signal: controller.signal });
+    } finally {
+        clearTimeout(timeoutId);
+    }
+}
+
+async function loadScenarios() {
+    try {
+        const response = await fetchWithTimeout(DATA_URL, LOAD_TIMEOUT_MS);
+
+        if (!response.ok) {
+            throw new Error(`Unable to load scenarios (HTTP ${response.status}).`);
+        }
+
+        let data;
+
+        try {
+            data = await response.json();
+        } catch (error) {
+            throw new Error("The scenario file is not valid JSON.");
+        }
+
+        validateScenarios(data);
+        return data;
+    } catch (error) {
+        if (error.name === "AbortError") {
+            throw new Error("Loading timed out. Please try again.");
+        }
+
+        if (error instanceof TypeError) {
+            throw new Error("A network error occurred while loading the scenarios.");
+        }
+
+        throw error;
+    }
+}
+
+async function init() {
+    renderLoadingState();
+
+    try {
+        const scenarios = await loadScenarios();
+
+        if (scenarios.length === 0) {
+            renderEmptyState();
+            return;
+        }
+
+        renderScenario(scenarios[0]);
+    } catch (error) {
+        renderErrorState(error.message);
+    }
+}
 
 phishingButton.addEventListener("click", function () {
     chooseAnswer("phishing");
@@ -94,3 +237,5 @@ hintButton.addEventListener("click", toggleHint);
 submitButton.addEventListener("click", checkAnswer);
 
 renderScenario(scenarios[0]);
+
+init();
