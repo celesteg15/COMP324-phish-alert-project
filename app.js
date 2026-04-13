@@ -168,7 +168,8 @@ function isValidScenario(scenario) {
         typeof scenario.difficulty === "string" &&
         typeof scenario.content === "string" &&
         typeof scenario.answer === "string" &&
-        typeof scenario.feedback === "string"
+        typeof scenario.feedback === "string" &&
+        typeof scenario.hint === "string"
     );
 }
 
