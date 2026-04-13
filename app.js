@@ -15,7 +15,7 @@ const nextButton = document.querySelector("#btn-next");
 
 const hintBox = document.querySelector("#hint-box");
 const hintText = document.querySelector("#hint-text");
-const retryContainer = document.querySelector("#retry-container")
+const retryContainer = document.querySelector("#retry-container");
 const scoreLine = document.querySelector("#score-line");
 
 let scenarios = [];
