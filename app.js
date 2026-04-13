@@ -33,13 +33,11 @@ const hintText = document.querySelector("#hint-text");
 let hintVisible = false;
 let selectedAnswer = "";
 
-function resetHint(scenario) {
-    hintVisible = false;
-    hintButton.disabled = false;
+function resetHint() {
+     hintVisible = false;
+    hintBox.hidden = true;
     hintButton.textContent = "Show Hint";
-    hintText.hidden = true;
-    hintText.textContent = scenario.hint;
-    
+    hintText.textContent = "";
 }
 
 function renderScenario(scenario) {
@@ -52,13 +50,21 @@ function renderScenario(scenario) {
     selectedAnswer = "";
     submitButton.disabled = true;
 
-    resetHint(scenario);
+    resetHint();
 }
 
 function toggleHint() {
+        const scenario = scenarios[0];
+
     hintVisible = !hintVisible;
-    hintText.hidden = !hintVisible;
+    hintBox.hidden = !hintVisible;
     hintButton.textContent = hintVisible ? "Hide Hint" : "Show Hint";
+
+    if (hintVisible) {
+        hintText.textContent = scenario.hint;
+    } else {
+        hintText.textContent = "";
+    }
 }
 
 function chooseAnswer(answer) {
@@ -75,14 +81,14 @@ function checkAnswer() {
     }
 }
 
+
 phishingButton.addEventListener("click", function () {
-    selectedAnswer = "phishing";
-})
+    chooseAnswer("phishing");
+});
 
 legitimateButton.addEventListener("click", function () {
-    selectedAnswer = "legitimate";
-})
-
+    chooseAnswer("legitimate");
+});
 
 hintButton.addEventListener("click", toggleHint);
 submitButton.addEventListener("click", checkAnswer);
