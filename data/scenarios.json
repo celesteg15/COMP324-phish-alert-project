@@ -1,0 +1,11 @@
+[
+  {
+    "sender": "loyola-support@secure-reset.com",
+    "subject": "Urgent: Reset Your Password",
+    "type": "Email",
+    "difficulty": "Easy",
+    "content": "Your Loyola account has been flagged for suspicious activity. Click the link below immediately to verify your password or your account will be locked.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it uses urgency and a suspicious sender address that does not match Loyola's official domain."
+  }
+]
