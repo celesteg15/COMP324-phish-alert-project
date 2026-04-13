@@ -117,30 +117,13 @@ function toggleHint() {
 }
 
 function chooseAnswer(answer) {
-    if (!currentScenario || hasSubmitted || selectedAnswer === "") {
+    if (!currentScenario || hasSubmitted) {
         return;
     }
 
 
     selectedAnswer = answer;
     submitButton.disabled = false;
-
-    if (selectedAnswer === currentScenario.answer) {
-        score += 1;
-        feedback.textContent = `Correct. ${currentScenario.feedback}`;
-    } else {
-        feedback.textContent = `Incorrect. ${currentScenario.feedback}`;
-    }
-
-    updateScoreLine();
-    submitButton.disabled = true;
-
-    if (currentIndex < scenarios.length - 1) {
-        nextButton.disabled = false;
-    } else {
-        nextButton.disabled = true;
-        feedback.textContent += ` Final score: ${score}/${answeredCount}.`;
-    }
 }
 
 function checkAnswer() {
