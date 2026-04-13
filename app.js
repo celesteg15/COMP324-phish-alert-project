@@ -8,17 +8,29 @@ const scenarios = [
             "Your Loyola account has been flagged for suspicious activity. Click the link below immediately to verify your password or your account will be locked.",
         answer: "phishing",
         feedback:
-            "This is phishing because it uses urgency and a suspicious sender address that does not match Loyola's official domain."
+            "This is phishing because it uses urgency and a suspicious sender address that does not match Loyola's official domain.",
+        hint:
+            "Look closely at the sender domain and the urgent language asking you to act immediately."
     }
 ];
 
 
-
+const sender = document.querySelector("#sender");
+const subject = document.querySelector("#subject");
 const type = document.querySelector("#type");
 const difficulty = document.querySelector("#difficulty");
 const content = document.querySelector("#content");
 const feedback = document.querySelector("#feedback");
 
+const phishingButton = document.querySelector("#btn-phishing");
+const legitimateButton = document.querySelector("#btn-legitimate");
+const submitButton = document.querySelector("#btn-submit");
+
+const hintButton = document.querySelector("#btn-hint");
+const hintText = document.querySelector("#hint-text");
+
+let hintVisible = false;
+let selectedAnswer = "";
 
 function renderScenario(scenario) {
     sender.textContent = scenario.sender;
@@ -27,4 +39,50 @@ function renderScenario(scenario) {
     difficulty.textContent = scenario.difficulty;
     content.textContent = scenario.content;
     feedback.textContent = "Submit your answer to see feedback.";
+
+    hintVisible = false;
+    hintButton.disabled = false;
+    hintButton.textContent = "Show Hint";
+    hintText.textContent = "";
+    hintText.hidden = true;
 }
+
+function toggleHint() {
+    const scenario = scenarios[0];
+
+    hintVisible = !hintVisible;
+
+    if (hintVisible) {
+        hintText.textContent = scenario.hint;
+        hintText.hidden = false;
+        hintButton.textContent = "Hide Hint";
+    } else {
+        hintText.textContent = "";
+        hintText.hidden = true;
+        hintButton.textContent = "Show Hint";
+    }
+}
+
+phishingButton.addEventListener("click", function () {
+    selectedAnswer = "phishing";
+    submitButton.disabled = false;
+})
+
+legitimateButton.addEventListener("click", function () {
+    selectedAnswer = "legitimate";
+    submitButton.disabled = false;
+})
+
+submitButton.addEventListener("click", function () {
+    const scenario = scenarios[0];
+
+    if (selectedAnswer === scenario.answer) {
+        feedback.textContent = scenario.feedback;
+    } else {
+        feedback.textContent = "That is not correct. Try again.";
+    }
+});
+
+hintButton.addEventListener("click", toggleHint);
+
+renderScenario(scenarios[0]);

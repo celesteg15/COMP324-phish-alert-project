@@ -7,13 +7,10 @@
  <link rel="stylesheet" href="./styles.css" />
 </head>
 
-
 <body>
  <main class="container">
    <h1>PhishQuiz</h1>
 
-
-   <!-- Message Panel -->
    <section class="card" aria-label="Message scenario">
      <div class="meta">
        <div><strong>From:</strong> <span id="sender">—</span></div>
@@ -22,32 +19,30 @@
        <div><strong>Difficulty:</strong> <span id="difficulty">—</span></div>
      </div>
 
-
      <pre id="content" class="content">Loading...</pre>
    </section>
 
-
-   <!-- Answer Buttons (render-only; no interaction yet) -->
    <section class="actions" aria-label="Answer choices">
      <button type="button" id="btn-phishing">Phishing</button>
      <button type="button" id="btn-legitimate">Legitimate</button>
+     <button type="button" id="btn-hint">Show Hint</button>
+     <p id="hint-text" hidden></p>
    </section>
 
+   <section class="card hint-card" aria-label="Hint">
+     <h2>Hint</h2>
+     <p id="hint-text" class="hint-text" hidden></p>
+   </section>
 
-   <!-- Submit (disabled for Commit 1) -->
    <button type="button" id="btn-submit" disabled>Submit</button>
 
-
-   <!-- Feedback area (empty for Commit 1) -->
    <section class="card" aria-label="Feedback">
      <h2>Feedback</h2>
      <div id="feedback" class="feedback">Submit your answer to see feedback.</div>
+     <div id="retry-container" class="retry-area"></div>
    </section>
  </main>
 
-
-<script type="module" src="./main.js"></script>
-<div id="retry-container"></div>
-<p id="progress"></p>
+ <script type="module" src="./app.js"></script>
 </body>
 </html>
