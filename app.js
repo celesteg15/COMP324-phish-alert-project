@@ -121,8 +121,9 @@ function chooseAnswer(answer) {
         return;
     }
 
-    hasSubmitted = true;
-    answeredCount += 1;
+
+    selectedAnswer = answer;
+    submitButton.disabled = false;
 
     if (selectedAnswer === currentScenario.answer) {
         score += 1;
