@@ -15,12 +15,12 @@ The project currently includes these main files:
 - `styles.css` — styling for the layout, buttons, cards, spacing, and text
 - `app.js` — the current working quiz logic; it loads the scenarios, keeps track of quiz state, handles answer selection, feedback, scoring, hints, retry behavior, and moving to the next question
 - `data/scenarios.json` — the local dataset with the phishing-awareness quiz scenarios
-- `main.js` — modular bootstrap file for loading and user actions
-- `api.js` — modular data-loading file for fetching scenarios and handling errors
-- `state.js` — modular state file containing the central state object and selector functions
-- `render.js` — modular render file for updating the UI from current state
-- `dom.js` — centralized DOM references for the modular version
-- `components/answerChoices.js` — extracted answer-choice component for the modular version
+- `refactor/main.js` — modular bootstrap file for loading and user actions
+- `refactor/api.js` — modular data-loading file for fetching scenarios and handling errors
+- `refactor/state.js` — modular state file containing the central state object and selector functions
+- `refactor/render.js` — modular render file for updating the UI from current state
+- `refactor/dom.js` — centralized DOM references for the modular version
+- `refactor/components/answerChoices.js` — extracted answer-choice component for the modular version
 
 ## Component contracts
 The extracted component in the project is:
