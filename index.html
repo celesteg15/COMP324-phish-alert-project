@@ -12,6 +12,17 @@
    <h1>PhishQuiz</h1>
     <p id="score-line">Score: 0/0 correct (0%)</p>
 
+  <!-- Added difficulty-filter UI so users can view only Easy, Medium, Hard, or all scenarios -->
+  <section class="controls-card card" aria-label="Quiz filters">
+    <label for="difficulty-filter"><strong>Difficulty:</strong></label>
+    <select id="difficulty-filter">
+      <option value="all">All difficulties</option>
+      <option value="Easy">Easy</option>
+      <option value="Medium">Medium</option>
+      <option value="Hard">Hard</option>
+    </select>
+  </section>
+
    <section class="card" aria-label="Message scenario">
      <div class="meta">
        <div><strong>From:</strong> <span id="sender">—</span></div>
@@ -23,19 +34,23 @@
      <p id="content" class="content">Loading...</p>
    </section>
 
-
+<!-- Old hardcoded answer buttons kept here for reference during refactor
    <section class="actions" aria-label="Answer choices">
      <button type="button" id="btn-phishing">Phishing</button>
      <button type="button" id="btn-legitimate">Legitimate</button>
      <button type="button" id="btn-hint">Show Hint</button>
    </section>
-
+   New answer choice container: buttons are now rendered dynamically by the AnswerChoices component:
+-->
+   <section class="actions" id="answer-actions" aria-label="Answer choices"></section> 
+   
    <section class="card hint-card" id="hint-box" aria-label="Hint" hidden>
      <h2>Hint</h2>
      <p id="hint-text" class="hint-text"></p>
    </section>
 
    <section class="actions" aria-label="Quiz controls">
+   <button type="button" id="btn-hint" disabled>Show Hint</button> 
    <button type="button" id="btn-submit" disabled>Submit</button>
    <button type="button" id="btn-next" disabled>Next</button>   
    </section>
@@ -47,6 +62,6 @@
    </section>
  </main>
 
- <script type="module" src="./app.js"></script>
+ <script type="module" src="./main.js"></script>
 </body>
 </html>

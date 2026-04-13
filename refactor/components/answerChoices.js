@@ -11,6 +11,8 @@ export function renderAnswerChoices({ container, selectedAnswer, disabled, onSel
   phishingBtn.type = "button";
   phishingBtn.textContent = "Phishing";
   phishingBtn.setAttribute("aria-pressed", String(selectedAnswer === "phishing"));
+  // Added: visually highlight the selected button using CSS
+  phishingBtn.classList.toggle("is-selected", selectedAnswer === "phishing");
   phishingBtn.disabled = disabled;
   phishingBtn.addEventListener("click", () => onSelect("phishing"));
 
@@ -18,6 +20,8 @@ export function renderAnswerChoices({ container, selectedAnswer, disabled, onSel
   legitimateBtn.type = "button";
   legitimateBtn.textContent = "Legitimate";
   legitimateBtn.setAttribute("aria-pressed", String(selectedAnswer === "legitimate"));
+  //Added: visually highlight the selected button using CSS
+  legitimateBtn.classList.toggle("is-selected", selectedAnswer === "legitimate");
   legitimateBtn.disabled = disabled;
   legitimateBtn.addEventListener("click", () => onSelect("legitimate"));
 
