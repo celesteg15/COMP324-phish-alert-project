@@ -11,15 +11,26 @@ const phishingButton = document.querySelector("#btn-phishing");
 const legitimateButton = document.querySelector("#btn-legitimate");
 const hintButton = document.querySelector("#btn-hint");
 const submitButton = document.querySelector("#btn-submit");
+const nextButton = document.querySelector("#btn-next");
 
 const hintBox = document.querySelector("#hint-box");
 const hintText = document.querySelector("#hint-text");
-const retryContainer = document.querySelector("#retry-container");
+const retryContainer = document.querySelector("#retry-container")
+const scoreLine = document.querySelector("#score-line");;
 
 let scenarios = [];
 let currentScenario = null;
+let currentIndex = 0;
 let hintVisible = false;
 let selectedAnswer = "";
+let score = 0;
+let answeredCount = 0;
+let hasSubmitted = false;
+
+function updateScoreLine() {
+    const percent = answeredCount === 0 ? 0 : Math.round((score / answeredCount) * 100);
+    scoreLine.textContent = `Score: ${score}/${answeredCount} correct (${percent}%)`;
+}
 
 function resetHint() {
     hintVisible = false;
@@ -36,7 +47,9 @@ function clearScenario() {
     content.textContent = "";
     currentScenario = null;
     selectedAnswer = "";
+    hasSubmitted = false;
     submitButton.disabled = true;
+    nextButton.disabled = true;
     hintButton.disabled = true;
     resetHint();
 }
@@ -76,18 +89,20 @@ function renderEmptyState() {
 
 function renderScenario(scenario) {
     currentScenario = scenario;
+    selectedAnswer = "";
+    hasSubmitted = false;
+    submitButton.disabled = true;
+    nextButton.disabled = true;
+    hintButton.disabled = false;
+    clearRetryButton();
+    resetHint();
+
     sender.textContent = scenario.sender;
     subject.textContent = scenario.subject;
     type.textContent = scenario.type;
     difficulty.textContent = scenario.difficulty;
     content.textContent = scenario.content;
-    feedback.textContent = "Submit your answer to see feedback.";
-
-    selectedAnswer = "";
-    submitButton.disabled = true;
-    hintButton.disabled = false;
-    clearRetryButton();
-    resetHint();
+    feedback.textContent = `Question ${currentIndex + 1} of ${scenarios.length}: Submit your answer to see feedback.`;
 }
 
 function toggleHint() {
@@ -102,7 +117,7 @@ function toggleHint() {
 }
 
 function chooseAnswer(answer) {
-    if (!currentScenario) {
+    if (!currentScenario || hasSubmitted) {
         return;
     }
 
@@ -111,15 +126,37 @@ function chooseAnswer(answer) {
 }
 
 function checkAnswer() {
-    if (!currentScenario) {
+  if (!currentScenario || hasSubmitted || selectedAnswer === "") {
         return;
     }
 
+    hasSubmitted = true;
+    answeredCount += 1;
+
     if (selectedAnswer === currentScenario.answer) {
-        feedback.textContent = currentScenario.feedback;
+        score += 1;
+        feedback.textContent = `Correct. ${currentScenario.feedback}`;
     } else {
-        feedback.textContent = "That is not correct. Try again.";
+        feedback.textContent = `Incorrect. ${currentScenario.feedback}`;
     }
+
+    updateScoreLine();
+    submitButton.disabled = true;
+
+    if (currentIndex < scenarios.length - 1) {
+        nextButton.disabled = false;
+    } else {
+        nextButton.disabled = true;
+        feedback.textContent += ` Final score: ${score}/${answeredCount}.`;
+    }
+}
+function goToNextScenario() {
+    if (currentIndex >= scenarios.length - 1) {
+        return;
+    }
+
+    currentIndex += 1;
+    renderScenario(scenarios[currentIndex]);
 }
 
 function isValidScenario(scenario) {
@@ -166,8 +203,11 @@ async function init() {
             renderEmptyState();
             return;
         }
-
-        renderScenario(scenarios[0]);
+        currentIndex = 0;
+        score = 0;
+        answeredCount = 0;
+        updateScoreLine();
+        renderScenario(scenarios[currentIndex]);
     } catch (error) {
         renderErrorState(error.message);
     }
@@ -183,5 +223,7 @@ legitimateButton.addEventListener("click", function () {
 
 hintButton.addEventListener("click", toggleHint);
 submitButton.addEventListener("click", checkAnswer);
+nextButton.addEventListener("click", goToNextScenario);
+
 
 init();
