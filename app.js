@@ -12,12 +12,14 @@ const scenarios = [
     }
 ];
 
+
 const sender = document.querySelector("#sender");
 const subject = document.querySelector("#subject");
 const type = document.querySelector("#type");
 const difficulty = document.querySelector("#difficulty");
 const content = document.querySelector("#content");
 const feedback = document.querySelector("#feedback");
+
 
 function renderScenario(scenario) {
     sender.textContent = scenario.sender;

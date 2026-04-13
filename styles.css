@@ -1,5 +1,6 @@
 /* A readable default */
 
+
 body {
     font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     line-height: 1.5;
@@ -7,11 +8,13 @@ body {
     padding: 0;
 }
 
+
 main {
     max-width: 60ch;
     margin: 0 auto;
     padding: 1.25rem;
 }
+
 
 header {
     display: flex;
@@ -22,19 +25,23 @@ header {
     border-bottom: 1px solid #ddd;
 }
 
+
 nav {
     display: flex;
     gap: .75rem;
 }
 
+
 nav a {
     color: inherit;
 }
+
 
 .site-title {
     margin: 0;
     font-weight: 700;
 }
+
 
 form {
     display: grid;
@@ -42,12 +49,14 @@ form {
     max-width: 28rem;
 }
 
+
 .alert {
     margin-top: 0.4rem;
     padding: 0.5rem 0.75rem;
     border-radius: 8px;
     border: 1px solid currentColor;
 }
+
 
 input,
 textarea,
@@ -58,6 +67,7 @@ select {
     border: 1px solid #ccc;
     border-radius: 8px;
 }
+
 
 :focus-visible {
     outline: 3px solid #005fcc;
