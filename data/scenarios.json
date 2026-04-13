@@ -8,5 +8,25 @@
     "answer": "phishing",
     "feedback": "This is phishing because it uses urgency and a suspicious sender address that does not match Loyola's official domain.",
     "hint": "Look closely at the sender domain and the urgent language asking you to act immediately."
+  },
+  {
+    "sender": "itsupport@luc.edu",
+    "subject": "Scheduled Maintenance Notice",
+    "type": "Email",
+    "difficulty": "Medium",
+    "content": "Loyola University Chicago IT will perform scheduled maintenance on student systems tonight from 11:00 PM to 1:00 AM. During this time, some services may be temporarily unavailable.",
+    "answer": "legitimate",
+    "feedback": "This message appears legitimate because it uses an official Loyola domain, gives informational details, and does not pressure the user to click suspicious links or share sensitive information.",
+    "hint": "Check whether the sender uses an official Loyola email domain and whether the message is informational instead of urgent."
+  },
+  {
+    "sender": "+1 (716) 275-8999",
+    "subject": "School Email Verification / Suspension Warning",
+    "type": "Text Message",
+    "difficulty": "Hard",
+    "content": "This is Karen Giblin from the Loyola University Newyork IT Help Center. We recently received a notification indicating that you are no longer a student at Loyola University school. ([LUCid]]@luc.edu) To proceed with the permanent deletion of your account, please confirm your decision by replying with YES to approve or NO to decline. We need to complete your school email account verification process to avoid your account from being suspended. Hello should we go ahead and suspend your school email account for now?",
+    "answer": "phishing",
+    "feedback": "This is phishing because it comes from an unknown phone number, uses pressure and threats about deleting or suspending the account, contains awkward wording, and refers to a suspiciously named 'Loyola University Newyork IT Help Center' rather than an official Loyola contact.",
+    "hint": "Notice the unknown phone number, the urgent threat about account suspension, and the unusual wording and naming of the supposed IT department."
   }
 ]
