@@ -24,13 +24,23 @@ const feedback = document.querySelector("#feedback");
 
 const phishingButton = document.querySelector("#btn-phishing");
 const legitimateButton = document.querySelector("#btn-legitimate");
+const hintButton = document.querySelector("#btn-hint");
 const submitButton = document.querySelector("#btn-submit");
 
-const hintButton = document.querySelector("#btn-hint");
+const hintBox = document.querySelector("#hint-box");
 const hintText = document.querySelector("#hint-text");
 
 let hintVisible = false;
 let selectedAnswer = "";
+
+function resetHint(scenario) {
+    hintVisible = false;
+    hintButton.disabled = false;
+    hintButton.textContent = "Show Hint";
+    hintText.hidden = true;
+    hintText.textContent = scenario.hint;
+    
+}
 
 function renderScenario(scenario) {
     sender.textContent = scenario.sender;
@@ -39,50 +49,42 @@ function renderScenario(scenario) {
     difficulty.textContent = scenario.difficulty;
     content.textContent = scenario.content;
     feedback.textContent = "Submit your answer to see feedback.";
+    selectedAnswer = "";
+    submitButton.disabled = true;
 
-    hintVisible = false;
-    hintButton.disabled = false;
-    hintButton.textContent = "Show Hint";
-    hintText.textContent = "";
-    hintText.hidden = true;
+    resetHint(scenario);
 }
 
 function toggleHint() {
-    const scenario = scenarios[0];
-
     hintVisible = !hintVisible;
-
-    if (hintVisible) {
-        hintText.textContent = scenario.hint;
-        hintText.hidden = false;
-        hintButton.textContent = "Hide Hint";
-    } else {
-        hintText.textContent = "";
-        hintText.hidden = true;
-        hintButton.textContent = "Show Hint";
-    }
+    hintText.hidden = !hintVisible;
+    hintButton.textContent = hintVisible ? "Hide Hint" : "Show Hint";
 }
 
-phishingButton.addEventListener("click", function () {
-    selectedAnswer = "phishing";
+function chooseAnswer(answer) {
+    selectedAnswer = answer;
     submitButton.disabled = false;
-})
+}
 
-legitimateButton.addEventListener("click", function () {
-    selectedAnswer = "legitimate";
-    submitButton.disabled = false;
-})
-
-submitButton.addEventListener("click", function () {
+function checkAnswer() {
     const scenario = scenarios[0];
-
     if (selectedAnswer === scenario.answer) {
         feedback.textContent = scenario.feedback;
     } else {
         feedback.textContent = "That is not correct. Try again.";
     }
-});
+}
+
+phishingButton.addEventListener("click", function () {
+    selectedAnswer = "phishing";
+})
+
+legitimateButton.addEventListener("click", function () {
+    selectedAnswer = "legitimate";
+})
+
 
 hintButton.addEventListener("click", toggleHint);
+submitButton.addEventListener("click", checkAnswer);
 
 renderScenario(scenarios[0]);
