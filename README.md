@@ -5,9 +5,9 @@ PhishQuiz is an interactive quiz app that helps users practice telling whether a
 
 Start a local server from the project folder:
 `
-python3 -m http.server 5500`
+python3 -m http.server 5500'
 
-http://localhost:5500`
+http://localhost:5500
 
 # Module map
 The project currently includes these main files:
