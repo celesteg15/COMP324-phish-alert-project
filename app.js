@@ -16,7 +16,7 @@ const nextButton = document.querySelector("#btn-next");
 const hintBox = document.querySelector("#hint-box");
 const hintText = document.querySelector("#hint-text");
 const retryContainer = document.querySelector("#retry-container")
-const scoreLine = document.querySelector("#score-line");;
+const scoreLine = document.querySelector("#score-line");
 
 let scenarios = [];
 let currentScenario = null;
@@ -117,16 +117,33 @@ function toggleHint() {
 }
 
 function chooseAnswer(answer) {
-    if (!currentScenario || hasSubmitted) {
+    if (!currentScenario || hasSubmitted || selectedAnswer === "") {
         return;
     }
 
-    selectedAnswer = answer;
-    submitButton.disabled = false;
+    hasSubmitted = true;
+    answeredCount += 1;
+
+    if (selectedAnswer === currentScenario.answer) {
+        score += 1;
+        feedback.textContent = `Correct. ${currentScenario.feedback}`;
+    } else {
+        feedback.textContent = `Incorrect. ${currentScenario.feedback}`;
+    }
+
+    updateScoreLine();
+    submitButton.disabled = true;
+
+    if (currentIndex < scenarios.length - 1) {
+        nextButton.disabled = false;
+    } else {
+        nextButton.disabled = true;
+        feedback.textContent += ` Final score: ${score}/${answeredCount}.`;
+    }
 }
 
 function checkAnswer() {
-  if (!currentScenario || hasSubmitted || selectedAnswer === "") {
+    if (!currentScenario || hasSubmitted || selectedAnswer === "") {
         return;
     }
 
