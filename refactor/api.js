@@ -1,4 +1,4 @@
-const DATA_URL = "./data/scenarios.json";
+const DATA_URL = "https://celesteg15.github.io/COMP324-phish-alert-project/data/scenarios.json";
 const REQUEST_TIMEOUT_MS = 8000;
 let activeController = null;
 
@@ -55,7 +55,7 @@ export async function loadScenarios() {
     }
 
     if (!Array.isArray(data)) {
-      throw new Error("The JSON file must contain an array of scenarios.");
+      throw new Error("The API must return an array of scenarios.");
     }
 
     for (const scenario of data) {
