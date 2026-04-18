@@ -9,6 +9,7 @@
 export function renderAnswerChoices({ container, selectedAnswer, disabled, onSelect }) {
   const phishingBtn = document.createElement("button");
   phishingBtn.type = "button";
+  phishingBtn.classList.add("btn-answer", "btn-phishing");
   phishingBtn.textContent = "Phishing";
   phishingBtn.setAttribute("aria-pressed", String(selectedAnswer === "phishing"));
   // Added: visually highlight the selected button using CSS
@@ -18,6 +19,7 @@ export function renderAnswerChoices({ container, selectedAnswer, disabled, onSel
 
   const legitimateBtn = document.createElement("button");
   legitimateBtn.type = "button";
+  legitimateBtn.classList.add("btn-answer", "btn-legitimate");
   legitimateBtn.textContent = "Legitimate";
   legitimateBtn.setAttribute("aria-pressed", String(selectedAnswer === "legitimate"));
   //Added: visually highlight the selected button using CSS

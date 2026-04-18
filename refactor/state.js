@@ -6,6 +6,7 @@ export const state = {
   selectedAnswer: null,
   submitted: false,
   hintVisible: false, // Control whether the hint box is currently visible.
+  activeDifficulty: "all",
   score: 0, // Added to track how many answers the user got correct
   answeredCount: 0, // Track how many questions the user has answered total
   activeDifficulty: "all", // New property to track the currently selected difficulty filter

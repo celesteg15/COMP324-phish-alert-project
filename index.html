@@ -4,15 +4,18 @@
  <meta charset="utf-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1" />
  <title>PhishQuiz</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800&display=swap" rel="stylesheet" />
  <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
  <main class="container">
-   <h1>PhishQuiz</h1>
+   <h1 class="site-title">PhishQuiz</h1>
     <p id="score-line">Score: 0/0 correct (0%)</p>
 
-  <!-- Added difficulty-filter UI so users can view only Easy, Medium, Hard, or all scenarios -->
+  <!-- Added difficulty-filter UI so users can view Easy, Medium, Hard, or all scenarios -->
   <section class="controls-card card" aria-label="Quiz filters">
     <label for="difficulty-filter"><strong>Difficulty:</strong></label>
     <select id="difficulty-filter">
@@ -34,13 +37,13 @@
      <p id="content" class="content">Loading...</p>
    </section>
 
-<!-- Old hardcoded answer buttons kept here for reference during refactor
+<!-- Old answer buttons:
    <section class="actions" aria-label="Answer choices">
      <button type="button" id="btn-phishing">Phishing</button>
      <button type="button" id="btn-legitimate">Legitimate</button>
      <button type="button" id="btn-hint">Show Hint</button>
    </section>
-   New answer choice container: buttons are now rendered dynamically by the AnswerChoices component:
+   New answer choice container, buttons are now rendered dynamically by the AnswerChoices component:
 -->
    <section class="actions" id="answer-actions" aria-label="Answer choices"></section> 
    

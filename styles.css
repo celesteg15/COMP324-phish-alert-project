@@ -3,6 +3,21 @@ body {
   line-height: 1.5;
   margin: 0;
   padding: 0;
+  background: linear-gradient(165deg, #f0f7ff 0%, #fff5f8 50%, #f5fff8 100%);
+  min-height: 100vh;
+}
+
+.site-title {
+  font-family: "Outfit", system-ui, sans-serif;
+  font-size: clamp(2.5rem, 7vw, 3.35rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0 0 0.35rem;
+  background: linear-gradient(120deg, #0d47a1 0%, #7b1fa2 45%, #00695c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* Replaced main selector with reusable container class */
@@ -14,10 +29,12 @@ body {
 
 /* Standard card styling for UI sections */
 .card {
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  border: 1px solid #e0e4ea;
+  border-radius: 12px;
   padding: 1rem;
   margin-bottom: 1rem;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
 }
 
 /* Added for difficulty filter layout */
@@ -39,6 +56,7 @@ body {
   white-space: pre-wrap;
   font: inherit;
   font-size: 1rem;
+  font-weight: 700;
   line-height: 1.6;
   max-width: 55ch;
   margin: 0;
@@ -103,6 +121,59 @@ button.is-selected {
   font-weight: 600;
 }
 
+/* Answer choice colors */
+button.btn-phishing {
+  background: #ffebee;
+  border-color: #e53935;
+  color: #b71c1c;
+}
+
+button.btn-phishing.is-selected {
+  border-color: #b71c1c;
+  box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.35);
+}
+
+button.btn-legitimate {
+  background: #e8f5e9;
+  border-color: #43a047;
+  color: #1b5e20;
+}
+
+button.btn-legitimate.is-selected {
+  border-color: #1b5e20;
+  box-shadow: 0 0 0 2px rgba(67, 160, 71, 0.35);
+}
+
+/* Difficulty filter accent by selection */
+#difficulty-filter {
+  font-weight: 600;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+#difficulty-filter.filter-all {
+  border-color: #5c6bc0;
+  background: #eef0ff;
+  box-shadow: 0 0 0 2px rgba(92, 107, 192, 0.25);
+}
+
+#difficulty-filter.filter-easy {
+  border-color: #2e7d32;
+  background: #e8f5e9;
+  box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.3);
+}
+
+#difficulty-filter.filter-medium {
+  border-color: #f9a825;
+  background: #fff8e1;
+  box-shadow: 0 0 0 2px rgba(249, 168, 37, 0.35);
+}
+
+#difficulty-filter.filter-hard {
+  border-color: #c62828;
+  background: #ffebee;
+  box-shadow: 0 0 0 2px rgba(198, 40, 40, 0.28);
+}
+
 /* Accessibility: visible focus outline for keyboard users */
 :focus-visible {
   outline: 3px solid #005fcc;
@@ -113,7 +184,31 @@ button.is-selected {
 #score-line {
   margin-top: -0.5rem;
   margin-bottom: 1rem;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: clamp(1.3rem, 3.2vw, 1.75rem);
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
+}
+
+.feedback-verdict {
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+#score-line.score-neutral {
+  color: #37474f;
+}
+
+#score-line.score-good {
+  color: #1b5e20;
+}
+
+#score-line.score-mid {
+  color: #f57f17;
+}
+
+#score-line.score-low {
+  color: #b71c1c;
 }
 
 /* body {

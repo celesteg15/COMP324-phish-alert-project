@@ -38,6 +38,18 @@ function clearRetryButton() {
   dom.retryContainer.replaceChildren();
 }
 
+function setSubmittedFeedbackVerdict(isCorrect, explanation, finalScoreSuffix) {
+  dom.feedback.replaceChildren();
+  const verdict = document.createElement("strong");
+  verdict.className = "feedback-verdict";
+  verdict.textContent = isCorrect ? "CORRECT. " : "INCORRECT. ";
+  dom.feedback.append(verdict);
+  dom.feedback.append(document.createTextNode(explanation));
+  if (finalScoreSuffix) {
+    dom.feedback.append(document.createTextNode(finalScoreSuffix));
+  }
+}
+
 /* Updates the UI based on the current state and wires up
    all event handlers for the interactive controls.
 */
@@ -45,11 +57,33 @@ export function render(handlers) {
   const { onRetry, onSelect, onSubmit, onNext, onToggleHint, onFilterChange } = handlers;
 
   dom.difficultyFilter.value = state.activeDifficulty;
+  dom.difficultyFilter.classList.remove(
+    "filter-all",
+    "filter-easy",
+    "filter-medium",
+    "filter-hard"
+  );
+  if (state.activeDifficulty === "all") dom.difficultyFilter.classList.add("filter-all");
+  else if (state.activeDifficulty === "Easy") dom.difficultyFilter.classList.add("filter-easy");
+  else if (state.activeDifficulty === "Medium") dom.difficultyFilter.classList.add("filter-medium");
+  else if (state.activeDifficulty === "Hard") dom.difficultyFilter.classList.add("filter-hard");
+
   dom.difficultyFilter.onchange = (event) => onFilterChange(event.target.value);
   dom.hintButton.onclick = onToggleHint;
   dom.submitButton.onclick = onSubmit;
   dom.nextButton.onclick = onNext;
   dom.scoreLine.textContent = `Score: ${state.score}/${state.answeredCount} correct (${getScorePercent()}%)`;
+  const pct = getScorePercent();
+  dom.scoreLine.classList.remove("score-good", "score-mid", "score-low", "score-neutral");
+  if (state.answeredCount === 0) {
+    dom.scoreLine.classList.add("score-neutral");
+  } else if (pct >= 80) {
+    dom.scoreLine.classList.add("score-good");
+  } else if (pct >= 50) {
+    dom.scoreLine.classList.add("score-mid");
+  } else {
+    dom.scoreLine.classList.add("score-low");
+  }
 
   clearRetryButton();
   dom.hintBox.hidden = true;
@@ -125,15 +159,11 @@ export function render(handlers) {
     return;
   }
 
-  if (state.selectedAnswer === scenario.answer) {
-    dom.feedback.textContent = `Correct. ${scenario.feedback}`;
-  } else {
-    dom.feedback.textContent = `Incorrect. ${scenario.feedback}`;
-  }
-// Append final score at the end of the filtered scenario list
-  if (!canGoNext()) {
-    dom.feedback.textContent += ` Final score: ${state.score}/${state.answeredCount}.`;
-  }
+  const isCorrect = state.selectedAnswer === scenario.answer;
+  const finalScoreSuffix = !canGoNext()
+    ? ` Final score: ${state.score}/${state.answeredCount}.`
+    : "";
+  setSubmittedFeedbackVerdict(isCorrect, scenario.feedback, finalScoreSuffix);
 }
 
 /*
