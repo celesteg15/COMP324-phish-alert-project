@@ -28,5 +28,157 @@
     "answer": "phishing",
     "feedback": "This is phishing because it comes from an unknown phone number, uses pressure and threats about deleting or suspending the account, contains awkward wording, and refers to a suspiciously named 'Loyola University Newyork IT Help Center' rather than an official Loyola contact.",
     "hint": "Notice the unknown phone number, the urgent threat about account suspension, and the unusual wording and naming of the supposed IT department."
+  },
+  {
+    "sender": "ITSservicedesk@LUC.edu",
+    "subject": "LOCUS Parent Guest Account Password Update Required by June 1, 2026",
+    "type": "Email",
+    "difficulty": "Hard",
+    "content": "Dear Student,\n\nTo keep accounts secure and meet updated University password standards, all Parent Guest Account passwords in LOCUS must be updated by June 1, 2026.\n\nParent Guest Accounts are managed by students, so you are responsible for updating the password and notifying your parents of the change.\n\nIf the password is not updated by the deadline, the University will automatically reset the Parent Guest Account password using a secure algorithm, which may cause temporary access issues.\n\nIf you need assistance, visit the Knowledge Base or contact the ITS Help Desk at ITSservicedesk@LUC.edu.\n\nSincerely,\n\nJim Pardonek\nChief Information Security Officer",
+    "answer": "legitimate",
+    "feedback": "This message appears legitimate because it uses an official Loyola email address, refers to a real university system, explains the policy clearly, and does not ask the user to click a suspicious link or provide sensitive information through an unofficial channel.",
+    "hint": "Check whether the sender uses an official Loyola domain, whether the message gives realistic institutional instructions, and whether it avoids suspicious links or requests for personal information."
+  },
+  {
+    "sender": "+1 (705) 465-8568",
+    "subject": "USPS Package Delivery Issue",
+    "type": "Text Message",
+    "difficulty": "Easy",
+    "content": "URGENT NOTICE\n\nPackage delivery issue. Check attachment immediately to avoid package being returned.\n\nXTRGU\n\nAttachment: MODIFIED_usa32aigawau21_us.pdf",
+    "answer": "phishing",
+    "feedback": "This is phishing because it comes from an unknown phone number, uses urgent pressure tactics, includes a suspicious random code, and sends an unexpected attachment. Legitimate delivery companies typically use official branded communication channels and do not send random PDF files by text.",
+    "hint": "Look for urgency, unexpected attachments, random wording, and whether the sender is an official USPS contact."
+  },
+  {
+    "sender": "+1 (217) 850-1658",
+    "subject": "Illinois DMV Warning",
+    "type": "Text Message",
+    "difficulty": "Medium",
+    "content": "ILLINOIS DMV WARNING: Time-sensitive traffic citation must be resolved by 03/17/26. Avoid permanent record, registration cancellation, 30-day suspension, and 35% penalty increase. Act officially: https://ilsos.org-npm.life/dmv",
+    "answer": "phishing",
+    "feedback": "This is phishing because it uses fear and urgency about penalties, comes from an unknown phone number, and includes a suspicious link that imitates an Illinois government domain. Official DMV or Secretary of State notices typically use trusted government websites, not misleading domains.",
+    "hint": "Check whether the sender is official, whether the message pressures you with threats, and whether the website domain truly matches a real government site."
+  },
+  {
+    "sender": "fraud-alert@bank-secureverify.net",
+    "subject": "Immediate Action Required: Debit Card Frozen",
+    "type": "Email",
+    "difficulty": "Easy",
+    "content": "Your debit card has been frozen due to suspicious transactions. Verify your identity within 30 minutes or your account will remain LOCKED.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it uses panic and urgency, threatens account lockout, and uses a suspicious sender domain that does not match a real bank.",
+    "hint": "Check for urgent deadlines and whether the sender domain looks official."
+  },
+  {
+    "sender": "+1 (331) 552-9941",
+    "subject": "Unpaid Toll Violation",
+    "type": "Text Message",
+    "difficulty": "Easy",
+    "content": "FINAL NOTICE: You owe unpaid toll charges. Pay today or face additional fines and vehicle registration suspension.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it uses fear tactics, urgency, and comes from an unknown number instead of an official toll authority.",
+    "hint": "Look for threats, urgency, and unofficial sender identity."
+  },
+  {
+    "sender": "support@streaming-billinghelp.com",
+    "subject": "Payment Failed - Account Deletion Pending",
+    "type": "Email",
+    "difficulty": "Easy",
+    "content": "Your payment failed and your streaming account will be permanently deleted tonight unless billing information is updated immediately.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it pressures the user into acting fast and uses a suspicious sender domain.",
+    "hint": "Notice emotional pressure and the unofficial email address."
+  },
+
+  {
+    "sender": "security@paypal-alerts.com",
+    "subject": "Unauthorized Purchase Detected",
+    "type": "Email",
+    "difficulty": "Medium",
+    "content": "We detected a $1,247 purchase on your PayPal account. If this was not you, confirm cancellation immediately through the secure portal below.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it creates panic about a fake charge and uses a suspicious sender domain pretending to be PayPal.",
+    "hint": "Look at the sender carefully and notice how the fake charge is meant to scare you."
+  },
+  {
+    "sender": "+1 (618) 204-7712",
+    "subject": "IRS Tax Warrant Notice",
+    "type": "Text Message",
+    "difficulty": "Medium",
+    "content": "IRS ALERT: Failure to respond to your overdue tax notice may result in wage garnishment or legal enforcement. Resolve today.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it impersonates the IRS through text, uses fear about legal action, and pressures immediate response.",
+    "hint": "Government agencies rarely send threats like this through random texts."
+  },
+  {
+    "sender": "ithelpdesk@luc-securityportal.com",
+    "subject": "Student Account Suspension Warning",
+    "type": "Email",
+    "difficulty": "Medium",
+    "content": "Your Loyola student account will be suspended today due to abnormal login attempts. Confirm your identity now to avoid losing email access.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it imitates a school IT message, uses fear of losing access, and uses a fake Loyola-related domain.",
+    "hint": "Look closely at the domain name and urgency."
+  },
+
+  {
+    "sender": "alerts@chase.com.verify-login.net",
+    "subject": "Large Wire Transfer Pending",
+    "type": "Email",
+    "difficulty": "Medium",
+    "content": "A $9,850 wire transfer request is pending on your Chase account. If you did not authorize this request, verify cancellation immediately.",
+    "answer": "phishing",
+    "feedback": "This is phishing because the sender domain only appears to be Chase. The extra domain ending shows it is fake and the large dollar amount is meant to cause panic.",
+    "hint": "Read the full domain carefully, especially what comes after the real brand name."
+  },
+  {
+    "sender": "+1 (773) 418-5092",
+    "subject": "Family Emergency Contact",
+    "type": "Text Message",
+    "difficulty": "Hard",
+    "content": "Mom was taken to the hospital. Doctors need immediate family authorization. Call me now and verify your information.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it exploits fear and family panic while requesting immediate contact and personal verification from an unknown number.",
+    "hint": "Emotional emergencies are common scam tactics when sent from unknown contacts."
+  },
+  {
+    "sender": "noreply@amazon.com.orders-review.co",
+    "subject": "Suspicious Order Shipped",
+    "type": "Email",
+    "difficulty": "Easy",
+    "content": "Your order for Apple MacBook Pro has shipped to an unrecognized address. If fraudulent, cancel within 15 minutes before final processing.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it creates panic over an expensive fake purchase and uses a deceptive domain pretending to be Amazon.",
+    "hint": "The brand name appears in the sender, but check the full domain ending."
+  },
+  {
+    "sender": "+1 (847) 551-9082",
+    "subject": "Hospital Emergency Contact",
+    "type": "Text Message",
+    "difficulty": "Hard",
+    "content": "This is Advocate Hospital. Your father listed you as emergency contact and cannot speak. We need identity confirmation and insurance details immediately.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it exploits fear involving family emergencies while requesting personal information from an unknown number.",
+    "hint": "Emotional urgency involving family is a common social engineering tactic."
+  },
+  {
+    "sender": "billing@xfinity.com-serviceupdate.co",
+    "subject": "Service Suspension Scheduled Today",
+    "type": "Email",
+    "difficulty": "Hard",
+    "content": "Your internet service is scheduled for suspension today due to a failed autopay charge. To avoid interruption during finals week, re-confirm your billing details now.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it targets a stressful time, uses fear of losing service, and uses a deceptive sender domain pretending to be Xfinity.",
+    "hint": "Notice how the sender contains the brand name but ends in a different domain."
+  },
+  {
+    "sender": "alerts@irs.gov-taxreview.co",
+    "subject": "Federal Return Flagged for Identity Conflict",
+    "type": "Email",
+    "difficulty": "Hard",
+    "content": "Your federal tax return was flagged because another filing used your Social Security Number. Immediate identity confirmation is required to prevent refund seizure.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it weaponizes identity theft fears and uses a fake sender that only imitates a government domain.",
+    "hint": "Government names in the sender do not guarantee legitimacy. Check the full domain ending."
   }
 ]
