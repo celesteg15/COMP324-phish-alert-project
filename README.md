@@ -4,23 +4,23 @@ PhishQuiz is an interactive quiz app that helps users practice telling whether a
 ## How to run
 
 Start a local server from the project folder:
-`
-python3 -m http.server 5500'
+```bash
+python3 -m http.server 5501
 
-http://localhost:5500
+http://localhost:5501
+```
 
 # Module map
-The project currently includes these main files:
-- `index.html` — the main structure of the quiz page
-- `styles.css` — styling for the layout, buttons, cards, spacing, and text
-- `app.js` — the current working quiz logic; it loads the scenarios, keeps track of quiz state, handles answer selection, feedback, scoring, hints, retry behavior, and moving to the next question
-- `data/scenarios.json` — the local dataset with the phishing-awareness quiz scenarios
-- `refactor/main.js` — modular bootstrap file for loading and user actions
-- `refactor/api.js` — modular data-loading file for fetching scenarios and handling errors
-- `refactor/state.js` — modular state file containing the central state object and selector functions
-- `refactor/render.js` — modular render file for updating the UI from current state
-- `refactor/dom.js` — centralized DOM references for the modular version
-- `refactor/components/answerChoices.js` — extracted answer-choice component for the modular version
+- `index.html` — main page structure and semantic regions
+- `styles.css` — styling for layout, buttons, feedback, and modal
+- `main.js` — app startup, event wiring, and quiz flow control
+- `api.js` — data loading, timeout handling, cancellation, validation, and fetch errors
+- `state.js` — single state object, selectors, and quiz helpers
+- `render.js` — rendering the loading, error, empty, and success UI states
+- `dom.js` — centralized DOM element references
+- `pointsModal.js` — points modal behavior
+- `components/answerChoices.js` — extracted answer-choice component
+- `data/scenarios.json` — quiz scenario data
 
 ## Component contracts
 The extracted component in the project is:
