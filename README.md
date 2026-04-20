@@ -44,29 +44,21 @@ The app currently uses these resilience patterns in the data-loading flow:
 - **Retry button** — shows a visible Retry button in the error state so the user can try loading again without refreshing the page
 - **Data validation** — checks that the JSON file contains an array and that each scenario has the required fields before the app tries to render it
 
-## Current feature status
+#### Feature list
+- Load quiz scenarios from a local JSON file
+- Display sender, subject, type, and message content
+- Select Phishing or Legitimate
+- Enable Submit after answer selection
+- Show correctness feedback after submission
+- Show points popup after submission
+- Deduct 25 points when hint is used
+- Apply late-submission penalty after timer expires
+- Move to the next question
+- Filter scenarios by difficulty
+- Track score, accuracy percentage, and total points
+- Show win modal when target points are reached
 
-### Working now
-- loads quiz scenarios from `data/scenarios.json`
-- displays all four UI states:
-  - loading
-  - error
-  - empty
-  - success
-- lets the user choose **Phishing** or **Legitimate**
-- enables **Submit** after an answer is selected
-- shows feedback after submission
-- tracks score and grade percentage
-- supports multiple scenarios
-- includes a **Next** button to move through questions
-- includes a **Show Hint / Hide Hint** toggle
-
-### Still in progress
-- fully switching the live app from the single-file `app.js` version to the modular `main.js`, `api.js`, `state.js`, `render.js`, and `dom.js` version
-- finalizing modular selector and state usage in the live version
-- finishing integration of the extracted component into the running modular flow
-- additional cleanup and testing before final submission
-- Previous button
-- retrying button on quiz
-- filter difficulty 
-- fix the showing of a visible Retry button in the error state
+## Known issues / limitations
+- Timer state must be observed carefully during slow manual testing.
+- Difficulty changes reset the visible question timer.
+- Quiz progress is not persisted after page refresh.
