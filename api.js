@@ -1,4 +1,4 @@
-const DATA_URL = "https://celesteg15.github.io/COMP324-phish-alert-project/data/scenarios.json";
+const DATA_URL = "./data/scenarios.json";
 const REQUEST_TIMEOUT_MS = 8000;
 let activeController = null;
 
@@ -66,17 +66,19 @@ export async function loadScenarios() {
 
     return data;
   } catch (error) {
-    if (controller.signal.aborted) {
-      if (controller.signal.reason === "timeout") {
-        throw new Error("Request timed out after 8 seconds. Please try again.");
-      }
+  if (controller.signal.aborted) {
+  if (controller.signal.reason === "timeout") {
+    throw new Error("Request timed out after 8 seconds. Please try again.");
+  }
 
-      throw new Error("Previous request canceled. Trying again...");
-    }
+  const staleRequestError = new Error("A newer request started.");
+  staleRequestError.code = "STALE_REQUEST";
+  throw staleRequestError;
+  }
 
-    if (error instanceof TypeError) {
-      throw new Error("Network error while loading scenarios. Please try again.");
-    }
+  if (error instanceof TypeError) {
+    throw new Error("Network error while loading scenarios. Please try again.");
+  }
 
     throw error;
   } finally {
@@ -87,37 +89,3 @@ export async function loadScenarios() {
     }
   }
 }
-
-
-
-/* timeout
-const controller = new AbortController();
-const timeoutId = setTimeout(() => controller.abort(), 8000);
-
-try {
-  // fetch call here
-} catch (error) {
-  if (error.name === "AbortError") {
-    throw new Error("Request timed out. Please try again.");
-  }
-  throw new Error("Network or loading error.");
-}
-
-//structured errors
-export async function loadScenarios(signal) {
-  const response = await fetch("./data/scenarios.json", { signal });
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}`);
-  }
-
-  const data = await response.json();
-
-  if (!Array.isArray(data)) {
-    throw new Error("Invalid data shape");
-  }
-
-  return data;
-}
-
-*/
