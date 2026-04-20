@@ -107,11 +107,11 @@ The app currently uses these resilience patterns in the data-loading flow:
 - Total test cases: 12
 - Passed: 12
 - Failed: 0
-- Bugs discovered: 5
-- Bugs fixed: 
+- Bugs discovered: 3
+- Bugs fixed: 3
 - Smoke test completed before deployment: yes
 
-## Team Mmebers
+## Team Members
 
 - Alexa:
 - Celeste:
