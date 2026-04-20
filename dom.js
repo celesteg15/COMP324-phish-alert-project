@@ -18,4 +18,8 @@ export const dom = {
   pointsModalEarned: document.querySelector("#points-modal-earned"),
   pointsModalBreakdown: document.querySelector("#points-modal-breakdown"),
   pointsModalClose: document.querySelector("#points-modal-close")
+  ,winModal: document.querySelector("#win-modal"),
+  winModalPlay: document.querySelector("#win-modal-play"),
+  winModalScore: document.querySelector("#win-modal-score"),
+  winModalMessage: document.querySelector("#win-modal-message")
 };

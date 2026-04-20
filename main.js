@@ -14,7 +14,7 @@ import {
 } from "./state.js";
 import { dom } from "./dom.js";
 import { render } from "./render.js";
-import { openPointsModal, closePointsModal, wirePointsModal } from "./pointsModal.js";
+import { openPointsModal, openWinModal, closePointsModal, wirePointsModal, wireWinModal } from "./pointsModal.js";
 
 /*
   Group all UI event handlers in one object so render() can receive
@@ -125,12 +125,17 @@ function handleSubmit() {
   }
 
   render(handlers);
-  openPointsModal({
-    earned,
-    correct,
-    hintUsed: state.submitSnapshot.hintUsed,
-    late: state.submitSnapshot.late
-  });
+  // If user reached the target total, show the win modal instead of the per-question modal
+  if (state.pointsTotal >= 1000) {
+    openWinModal({ totalPoints: state.pointsTotal });
+  } else {
+    openPointsModal({
+      earned,
+      correct,
+      hintUsed: state.submitSnapshot.hintUsed,
+      late: state.submitSnapshot.late
+    });
+  }
 }
 
 /*
@@ -224,6 +229,7 @@ function updateTimerDisplay() {
 }
 
 wirePointsModal();
+wireWinModal(startLoad);
 setInterval(updateTimerDisplay, 250);
 updateTimerDisplay();
 startLoad();

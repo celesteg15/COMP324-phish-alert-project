@@ -249,6 +249,43 @@ button.btn-legitimate.is-selected {
   margin: 0 0 0.5rem;
 }
 
+/* Make the instruction / scoring rules card more attention-grabbing */
+.scoring-rules {
+  background: #fff0f6; /* very light pink */
+  border-color: #ffd6e8;
+}
+
+/* Win modal tweaks share the points modal visuals */
+.win-modal__panel {
+  width: min(100%, 30rem);
+  padding: 1.35rem 1.5rem;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
+  border: 1px solid #e0e4ea;
+}
+.win-modal__title {
+  margin: 0 0 0.75rem;
+  font-size: 1.2rem;
+}
+.win-modal__message {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+}
+.win-modal__play {
+  width: 100%;
+  font-weight: 800;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  border: 2px solid #00695c;
+  background: #e8f5e9;
+  color: #004d40;
+  cursor: pointer;
+}
+.win-modal__play:hover {
+  background: #c8e6c9;
+}
+
 .feedback-key {
   text-decoration: underline;
   text-decoration-thickness: 2px;
@@ -322,90 +359,3 @@ button.btn-legitimate.is-selected {
   background: #bbdefb;
 }
 
-/* body {
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    line-height: 1.5;
-    margin: 0;
-    padding: 0;
-}
-
-main {
-    max-width: 65ch;
-    margin: 0 auto;
-    padding: 1.25rem;
-}
-
-.card {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-}
-
-.meta {
-    display: grid;
-    gap: 0.35rem;
-    margin-bottom: 1rem;
-}
-
-.content {
-    white-space: pre-wrap;
-    font-family: inherit;
-    font-size: 1rem;
-    line-height: 1.6;
-    max-width: 55ch;
-    margin: 0;
-    overflow-wrap: anywhere;
-}
-
-.actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-}
-
-.feedback,
-.hint-text {
-    margin-top: 0.4rem;
-    max-width: 55ch;
-}
-
-.hint-card {
-    padding-top: 0.8rem;
-}
-
-.hint-card h2,
-.card h2 {
-    margin-top: 0;
-}
-
-.retry-area {
-    margin-top: 1rem;
-}
-
-button {
-    padding: 0.5rem 0.75rem;
-    font: inherit;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background: white;
-    cursor: pointer;
-}
-
-button[disabled] {
-    cursor: not-allowed;
-    opacity: 0.65;
-}
-
-:focus-visible {
-    outline: 3px solid #005fcc;
-    outline-offset: 2px;
-}
-
-#score-line {
-    margin-top: -0.5rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-}
-*/

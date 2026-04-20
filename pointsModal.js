@@ -63,3 +63,44 @@ export function wirePointsModal() {
     }
   });
 }
+
+export function openWinModal({ totalPoints }) {
+  const winModal = dom.winModal;
+  if (!winModal) return;
+  const scoreEl = dom.winModalScore;
+  const msgEl = dom.winModalMessage;
+  if (scoreEl) {
+    scoreEl.textContent = `Total points: ${totalPoints}`;
+  }
+  if (msgEl) {
+    msgEl.textContent = "You've improved your resistance to modern phishing scams.";
+  }
+  winModal.classList.remove("is-hidden");
+  dom.winModalPlay?.focus();
+}
+
+export function closeWinModal() {
+  dom.winModal?.classList.add("is-hidden");
+}
+
+export function wireWinModal(onPlayAgain) {
+  dom.winModalPlay?.addEventListener("click", () => {
+    closeWinModal();
+    if (typeof onPlayAgain === "function") {
+      onPlayAgain();
+      return;
+    }
+    // fallback: dispatch global event
+    document.dispatchEvent(new CustomEvent("play-again"));
+  });
+  dom.winModal?.addEventListener("click", (e) => {
+    if (e.target === dom.winModal) {
+      closeWinModal();
+    }
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && dom.winModal && !dom.winModal.classList.contains("is-hidden")) {
+      closeWinModal();
+    }
+  });
+}
