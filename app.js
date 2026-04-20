@@ -1,5 +1,4 @@
-const DATA_URL = "./data/scenarios.json";
-
+const DATA_URL = "https://celesteg15.github.io/COMP324-phish-alert-project/data/scenarios.json";
 const sender = document.querySelector("#sender");
 const subject = document.querySelector("#subject");
 const type = document.querySelector("#type");
