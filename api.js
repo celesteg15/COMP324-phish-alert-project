@@ -58,13 +58,26 @@ export async function loadScenarios() {
       throw new Error("The API must return an array of scenarios.");
     }
 
-    for (const scenario of data) {
-      if (!isValidScenario(scenario)) {
-        throw new Error("One or more scenarios are missing required fields.");
+    // Validate each scenario individually and keep only the valid ones.
+    const valid = [];
+    const invalidCount = 0;
+    for (let i = 0; i < data.length; i++) {
+      const scenario = data[i];
+      if (isValidScenario(scenario)) {
+        valid.push(scenario);
+      } else {
+        // Log a helpful message for debugging but don't fail the entire load.
+        // Keep messages minimal so students can inspect the data file if needed.
+        // eslint-disable-next-line no-console
+        console.warn(`Skipping invalid scenario at index ${i}`);
       }
     }
 
-    return data;
+    if (valid.length === 0) {
+      throw new Error("No valid scenarios found in the data.");
+    }
+
+    return valid;
   } catch (error) {
   if (controller.signal.aborted) {
   if (controller.signal.reason === "timeout") {
