@@ -3,13 +3,14 @@
 PhishQuiz is an interactive quiz app that helps users practice telling whether a message is **phishing** or **legitimate**. The app loads quiz scenarios from a local JSON file and lets users read each message, choose an answer, get feedback, use a hint if they need one, move to the next question, and keep track of their score as they go.
 ## How to run
 
+## How to run
+
 Start a local server from the project folder:
+
 ```bash
 python3 -m http.server 5501
 
-http://localhost:5501
-```
-##Deployed URL
+## Deployed URL
 https://celesteg15.github.io/COMP324-phish-alert-project/
 
 # Module map
