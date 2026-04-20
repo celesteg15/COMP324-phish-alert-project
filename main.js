@@ -1,5 +1,8 @@
 // main.js
 
+// load sequence gaurds against race conditions where multiple loads could complete out of order and cause stale data to be rendered
+let loadSequence = 0;
+
 import { loadScenarios } from "./api.js";
 import {
   state,
@@ -44,6 +47,7 @@ function resetQuestionState() {
   Also handles loading, empty, success, and error UI states.
 */
 async function startLoad() {
+  const sequence = ++loadSequence;
   closePointsModal();
   state.status = "loading";
   state.errorMessage = "";
@@ -54,6 +58,9 @@ async function startLoad() {
 
   try {
     state.scenarios = await loadScenarios();
+    if (sequence !== loadSequence) {
+      return;
+    }
     state.score = 0;
     state.answeredCount = 0;
     state.pointsTotal = 0;
@@ -220,46 +227,3 @@ wirePointsModal();
 setInterval(updateTimerDisplay, 250);
 updateTimerDisplay();
 startLoad();
-
-/*
-import { loadScenarios } from "./api.js";
-import { state } from "./state.js";
-import { render } from "./render.js";
-import { dom } from "./dom.js";
-
-async function startLoad() {
-  state.status = "loading";
-  state.errorMessage = "";
-  render(startLoad, handleSelect, handleSubmit);
-
-  try {
-    const scenarios = await loadScenarios();
-    state.scenarios = scenarios;
-
-    if (scenarios.length === 0) {
-      state.status = "empty";
-    } else {
-      state.status = "success";
-    }
-  } catch (error) {
-    state.status = "error";
-    state.errorMessage = error.message;
-  }
-
-  render(startLoad, handleSelect, handleSubmit);
-}
-
-function handleSelect(value) {
-  state.selectedAnswer = value;
-  state.submitted = false;
-  render(startLoad, handleSelect, handleSubmit);
-}
-
-function handleSubmit() {
-  state.submitted = true;
-  render(startLoad, handleSelect, handleSubmit);
-}
-
-dom.submit.addEventListener("click", handleSubmit);
-startLoad();
-*/
