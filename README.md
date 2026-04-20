@@ -110,3 +110,8 @@ The app currently uses these resilience patterns in the data-loading flow:
 - Bugs discovered: 5
 - Bugs fixed: 
 - Smoke test completed before deployment: yes
+
+## Team Mmebers
+
+- Alexa:
+- Celeste:
