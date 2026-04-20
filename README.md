@@ -9,6 +9,8 @@ python3 -m http.server 5501
 
 http://localhost:5501
 ```
+##Deployed URL
+https://celesteg15.github.io/COMP324-phish-alert-project/
 
 # Module map
 - `index.html` — main page structure and semantic regions
