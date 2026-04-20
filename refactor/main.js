@@ -1,8 +1,17 @@
 // main.js
 
 import { loadScenarios } from "./api.js";
-import { state, getFilteredScenarios, getCurrentScenario } from "./state.js";
+import {
+  state,
+  getFilteredScenarios,
+  getCurrentScenario,
+  computeQuestionPoints,
+  syncQuestionTimerForCurrentQuestion,
+  getTimerSecondsForScenario
+} from "./state.js";
+import { dom } from "./dom.js";
 import { render } from "./render.js";
+import { openPointsModal, closePointsModal, wirePointsModal } from "./pointsModal.js";
 
 /*
   Group all UI event handlers in one object so render() can receive
@@ -25,6 +34,9 @@ function resetQuestionState() {
   state.selectedAnswer = null;
   state.submitted = false;
   state.hintVisible = false;
+  state.hintRevealedBeforeSubmit = false;
+  state.timerExpired = false;
+  state.submitSnapshot = null;
 }
 
 /*
@@ -32,17 +44,21 @@ function resetQuestionState() {
   Also handles loading, empty, success, and error UI states.
 */
 async function startLoad() {
+  closePointsModal();
   state.status = "loading";
   state.errorMessage = "";
   resetQuestionState();
   state.currentIndex = 0;
+  state.timerStamp = "";
   render(handlers);
 
   try {
     state.scenarios = await loadScenarios();
     state.score = 0;
     state.answeredCount = 0;
+    state.pointsTotal = 0;
     state.currentIndex = 0;
+    state.timerStamp = "";
     state.status = state.scenarios.length === 0 ? "empty" : "success";
   } catch (error) {
     state.status = "error";
@@ -73,18 +89,41 @@ function handleSelect(value) {
 function handleSubmit() {
   const scenario = getCurrentScenario();
 
-  if (!scenario || state.selectedAnswer === null || state.submitted) {
+  if (!scenario || state.submitted) {
     return;
   }
+
+  const canSubmitWithoutAnswer = state.timerExpired && state.selectedAnswer === null;
+  if (state.selectedAnswer === null && !canSubmitWithoutAnswer) {
+    return;
+  }
+
+  const late = Date.now() > state.questionDeadlineMs;
+  const correct =
+    state.selectedAnswer !== null && state.selectedAnswer === scenario.answer;
+
+  const earned = computeQuestionPoints({
+    correct,
+    hintUsed: state.hintRevealedBeforeSubmit,
+    late
+  });
+  state.pointsTotal += earned;
+  state.submitSnapshot = { earned, hintUsed: state.hintRevealedBeforeSubmit, late };
 
   state.submitted = true;
   state.answeredCount += 1;
 
-  if (state.selectedAnswer === scenario.answer) {
+  if (correct) {
     state.score += 1;
   }
 
   render(handlers);
+  openPointsModal({
+    earned,
+    correct,
+    hintUsed: state.submitSnapshot.hintUsed,
+    late: state.submitSnapshot.late
+  });
 }
 
 /*
@@ -96,6 +135,7 @@ function handleNext() {
     return;
   }
 
+  closePointsModal();
   state.currentIndex += 1;
   resetQuestionState();
   render(handlers);
@@ -110,6 +150,9 @@ function handleToggleHint() {
   }
 
   state.hintVisible = !state.hintVisible;
+  if (state.hintVisible) {
+    state.hintRevealedBeforeSubmit = true;
+  }
   render(handlers);
 }
 
@@ -118,6 +161,7 @@ function handleToggleHint() {
   matching scenario, and rerender the filtered results.
 */
 function handleFilterChange(value) {
+  closePointsModal();
   state.activeDifficulty = value;
   state.currentIndex = 0;
   resetQuestionState();
@@ -131,10 +175,51 @@ function handleFilterChange(value) {
   render(handlers);
 }
 
-/* Start the app when the page loads. */
+function updateTimerDisplay() {
+  const el = dom.timerLine;
+  if (!el) {
+    return;
+  }
+
+  if (state.status !== "success") {
+    el.hidden = true;
+    el.textContent = "";
+    el.classList.remove("timer-warning", "timer-expired");
+    return;
+  }
+
+  const scenario = getCurrentScenario();
+  if (!scenario || state.submitted) {
+    el.hidden = true;
+    el.textContent = "";
+    el.classList.remove("timer-warning", "timer-expired");
+    return;
+  }
+
+  syncQuestionTimerForCurrentQuestion();
+
+  const secondsTotal = getTimerSecondsForScenario(scenario.difficulty);
+  const remainingMs = Math.max(0, state.questionDeadlineMs - Date.now());
+  const remainingSec = Math.ceil(remainingMs / 1000);
+
+  if (remainingSec <= 0 && !state.timerExpired) {
+    state.timerExpired = true;
+    render(handlers);
+    return;
+  }
+
+  el.hidden = false;
+  const mm = Math.floor(remainingSec / 60);
+  const ss = remainingSec % 60;
+  el.textContent = `Time: ${String(mm).padStart(2, "0")}:${String(ss).padStart(2, "0")} / ${secondsTotal}s`;
+  el.classList.toggle("timer-warning", remainingSec > 0 && remainingSec <= 10);
+  el.classList.toggle("timer-expired", state.timerExpired || remainingSec === 0);
+}
+
+wirePointsModal();
+setInterval(updateTimerDisplay, 250);
+updateTimerDisplay();
 startLoad();
-
-
 
 /*
 import { loadScenarios } from "./api.js";

@@ -6,7 +6,10 @@ import {
   getCurrentScenario,
   isSubmitDisabled,
   canGoNext,
-  getScorePercent
+  getScorePercent,
+  syncQuestionTimerForCurrentQuestion,
+  HINT_PENALTY_POINTS,
+  TIME_PENALTY_POINTS
 } from "./state.js";
 import { renderAnswerChoices } from "./components/answerChoices.js";
 
@@ -15,7 +18,31 @@ function clearScenarioFields() {
   dom.sender.textContent = "—";
   dom.subject.textContent = "—";
   dom.type.textContent = "—";
-  dom.difficulty.textContent = "—";
+}
+
+/*
+  Underline the main explanatory clause (typically starting at "because …")
+  so the core reason stands out from the rest of the feedback sentence.
+*/
+function appendExplanationWithKeyUnderline(container, text) {
+  const becauseRe = /(?:^|\s)because\b/i;
+  const m = text.match(becauseRe);
+  if (!m || m.index === undefined) {
+    container.append(document.createTextNode(text));
+    return;
+  }
+  const start = m.index;
+  container.append(document.createTextNode(text.slice(0, start)));
+  const tail = text.slice(start);
+  const sentMatch = tail.match(/^[\s\S]+?[.!?](?=\s|$)/);
+  const underLen = sentMatch ? sentMatch[0].length : tail.length;
+  const span = document.createElement("span");
+  span.className = "feedback-key";
+  span.textContent = tail.slice(0, underLen);
+  container.append(span);
+  if (underLen < tail.length) {
+    container.append(document.createTextNode(tail.slice(underLen)));
+  }
 }
 
 /*
@@ -38,15 +65,15 @@ function clearRetryButton() {
   dom.retryContainer.replaceChildren();
 }
 
-function setSubmittedFeedbackVerdict(isCorrect, explanation, finalScoreSuffix) {
+function setSubmittedFeedbackVerdict(isCorrect, explanation, trailingSuffix) {
   dom.feedback.replaceChildren();
   const verdict = document.createElement("strong");
   verdict.className = "feedback-verdict";
   verdict.textContent = isCorrect ? "CORRECT. " : "INCORRECT. ";
   dom.feedback.append(verdict);
-  dom.feedback.append(document.createTextNode(explanation));
-  if (finalScoreSuffix) {
-    dom.feedback.append(document.createTextNode(finalScoreSuffix));
+  appendExplanationWithKeyUnderline(dom.feedback, explanation);
+  if (trailingSuffix) {
+    dom.feedback.append(document.createTextNode(trailingSuffix));
   }
 }
 
@@ -72,7 +99,7 @@ export function render(handlers) {
   dom.hintButton.onclick = onToggleHint;
   dom.submitButton.onclick = onSubmit;
   dom.nextButton.onclick = onNext;
-  dom.scoreLine.textContent = `Score: ${state.score}/${state.answeredCount} correct (${getScorePercent()}%)`;
+  dom.scoreLine.textContent = `Score: ${state.score}/${state.answeredCount} correct (${getScorePercent()}%) · ${state.pointsTotal} pts`;
   const pct = getScorePercent();
   dom.scoreLine.classList.remove("score-good", "score-mid", "score-low", "score-neutral");
   if (state.answeredCount === 0) {
@@ -131,11 +158,14 @@ export function render(handlers) {
 
   const scenario = getCurrentScenario();
 
+  if (!state.submitted) {
+    syncQuestionTimerForCurrentQuestion();
+  }
+
   clearScenarioFields();
   dom.sender.textContent = scenario.sender;
   dom.subject.textContent = scenario.subject;
   dom.type.textContent = scenario.type;
-  dom.difficulty.textContent = scenario.difficulty;
   dom.content.textContent = scenario.content;
   dom.hintButton.disabled = false;
   dom.submitButton.disabled = isSubmitDisabled();
@@ -155,15 +185,34 @@ export function render(handlers) {
   }
 
   if (!state.submitted) {
-    dom.feedback.textContent = `Question ${state.currentIndex + 1} of ${filteredScenarios.length}: Submit your answer to see feedback.`;
+    let prompt = `Question ${state.currentIndex + 1} of ${filteredScenarios.length}: Submit your answer to see feedback.`;
+    if (state.timerExpired && state.selectedAnswer === null) {
+      prompt =
+        "TIME'S UP! — press Submit to record this question with no answer. Point penalties for hint or late submit still apply.";
+    }
+    dom.feedback.textContent = prompt;
     return;
   }
 
   const isCorrect = state.selectedAnswer === scenario.answer;
-  const finalScoreSuffix = !canGoNext()
-    ? ` Final score: ${state.score}/${state.answeredCount}.`
-    : "";
-  setSubmittedFeedbackVerdict(isCorrect, scenario.feedback, finalScoreSuffix);
+  let trailing = "";
+  if (state.submitSnapshot) {
+    const { earned, hintUsed, late } = state.submitSnapshot;
+    const pen = [];
+    if (hintUsed) {
+      pen.push(`hint −${HINT_PENALTY_POINTS}`);
+    }
+    if (late) {
+      pen.push(`time −${TIME_PENALTY_POINTS}`);
+    }
+    trailing += ` Points this question: ${earned}`;
+    trailing += pen.length ? ` (${pen.join(", ")}).` : ".";
+    trailing += ` Total points: ${state.pointsTotal}.`;
+  }
+  if (!canGoNext()) {
+    trailing += ` Final score: ${state.score}/${state.answeredCount} correct.`;
+  }
+  setSubmittedFeedbackVerdict(isCorrect, scenario.feedback, trailing);
 }
 
 /*
@@ -193,7 +242,6 @@ export function render(onRetry, onSelect, onSubmit) {
   dom.sender.textContent = scenario.sender;
   dom.subject.textContent = scenario.subject;
   dom.type.textContent = scenario.type;
-  dom.difficulty.textContent = scenario.difficulty;
   dom.content.textContent = scenario.content;
   dom.submit.disabled = isSubmitDisabled();
 

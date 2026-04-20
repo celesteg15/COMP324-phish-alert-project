@@ -14,6 +14,7 @@
  <main class="container">
    <h1 class="site-title">PhishQuiz</h1>
     <p id="score-line">Score: 0/0 correct (0%)</p>
+    <p id="timer-line" class="timer-line" hidden aria-live="polite"></p>
 
   <!-- Added difficulty-filter UI so users can view Easy, Medium, Hard, or all scenarios -->
   <section class="controls-card card" aria-label="Quiz filters">
@@ -26,12 +27,23 @@
     </select>
   </section>
 
+  <details class="card scoring-rules" aria-label="How scoring works">
+    <summary class="scoring-rules__summary">How scoring works &amp; how to WIN</summary>
+    <div class="scoring-rules__body">
+      <p><strong>Points each question:</strong> you start from a base of <strong>+100</strong> if your answer is correct, or <strong>0</strong> if it is not. Your score for that round cannot go below zero.</p>
+      <ul>
+        <li><strong>Hint:</strong> opening the hint before you submit costs <strong>−25</strong> points on that question.</li>
+        <li><strong>Timer:</strong> each message uses its own difficulty timer (Easy <strong>60s</strong>, Medium <strong>45s</strong>, Hard <strong>30s</strong>). Submitting after time runs out costs <strong>−40</strong> points on that question.</li>
+      </ul>
+      <p><strong>How to &ldquo;win&rdquo;:</strong> finish the quiz with a high correct count <em>and</em> a high point total by answering correctly, staying under the timer, and avoiding hints when you can. After each submit, a pop-up shows exactly how many points you earned on that question (for example <strong>+100</strong>, <strong>+35</strong>, or <strong>0</strong>).</p>
+    </div>
+  </details>
+
    <section class="card" aria-label="Message scenario">
      <div class="meta">
        <div><strong>From:</strong> <span id="sender">—</span></div>
        <div><strong>Subject:</strong> <span id="subject">—</span></div>
        <div><strong>Type:</strong> <span id="type">—</span></div>
-       <div><strong>Difficulty:</strong> <span id="difficulty">—</span></div>
      </div>
 
      <p id="content" class="content">Loading...</p>
@@ -64,6 +76,15 @@
      <div id="retry-container" class="retry-area"></div>
    </section>
  </main>
+
+ <div id="points-modal" class="points-modal is-hidden" role="dialog" aria-modal="true" aria-labelledby="points-modal-title">
+   <div class="points-modal__panel">
+     <h2 id="points-modal-title" class="points-modal__title">Points this round</h2>
+     <p id="points-modal-earned" class="points-modal__earned" aria-live="polite"></p>
+     <ul id="points-modal-breakdown" class="points-modal__breakdown"></ul>
+     <button type="button" id="points-modal-close" class="points-modal__close">Got it</button>
+   </div>
+ </div>
 
  <script type="module" src="./refactor/main.js"></script>
 </body>

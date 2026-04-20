@@ -2,10 +2,10 @@ export const dom = {
   sender: document.querySelector("#sender"),
   subject: document.querySelector("#subject"),
   type: document.querySelector("#type"),
-  difficulty: document.querySelector("#difficulty"),
   content: document.querySelector("#content"),
   feedback: document.querySelector("#feedback"),
   scoreLine: document.querySelector("#score-line"),
+  timerLine: document.querySelector("#timer-line"),
   difficultyFilter: document.querySelector("#difficulty-filter"),
   answerActions: document.querySelector("#answer-actions"),
   hintBox: document.querySelector("#hint-box"),
@@ -13,5 +13,9 @@ export const dom = {
   hintButton: document.querySelector("#btn-hint"),
   submitButton: document.querySelector("#btn-submit"),
   nextButton: document.querySelector("#btn-next"),
-  retryContainer: document.querySelector("#retry-container")
+  retryContainer: document.querySelector("#retry-container"),
+  pointsModal: document.querySelector("#points-modal"),
+  pointsModalEarned: document.querySelector("#points-modal-earned"),
+  pointsModalBreakdown: document.querySelector("#points-modal-breakdown"),
+  pointsModalClose: document.querySelector("#points-modal-close")
 };
