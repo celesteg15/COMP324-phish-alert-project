@@ -46,7 +46,7 @@
        <div><strong>Type:</strong> <span id="type">—</span></div>
      </div>
 
-     <p id="content" class="content">Loading...</p>
+    <p id="content" class="content" aria-live="polite" aria-atomic="true">Loading...</p>
    </section>
 
 <!-- Old answer buttons:
@@ -72,7 +72,7 @@
 
    <section class="card" aria-label="Feedback">
      <h2>Feedback</h2>
-     <div id="feedback" class="feedback">Submit your answer to see feedback.</div>
+     <div id="feedback" class="feedback" aria-live="polite" aria-atomic="true">Submit your answer to see feedback.</div>
      <div id="retry-container" class="retry-area"></div>
    </section>
  </main>
@@ -86,6 +86,6 @@
    </div>
  </div>
 
- <script type="module" src="./refactor/main.js"></script>
+ <script type="module" src="./main.js"></script>
 </body>
 </html>
