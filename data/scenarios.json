@@ -181,4 +181,166 @@
     "feedback": "This is phishing because it weaponizes identity theft fears and uses a fake sender that only imitates a government domain.",
     "hint": "Government names in the sender do not guarantee legitimacy. Check the full domain ending."
   }
+  ,
+  {
+    "sender": "no-reply@LoyolaUniversityLibrary.edu",
+    "subject": "Overdue Materials: Action Required",
+    "type": "Email",
+    "difficulty": "Easy",
+    "content": "Our records show you have overdue library materials. Please return or renew them within 14 days to avoid fines. Visit your library account to manage loans.",
+    "answer": "legitimate",
+    "feedback": "This is likely legitimate: it comes from an institutional domain and gives a clear, non-urgent instruction to use your account portal.",
+    "hint": "Check that the sender domain matches the library's official domain and that the message is informational rather than urgent."
+  },
+  {
+    "sender": "support@docu-signs.co",
+    "subject": "Please sign the attached agreement",
+    "type": "Email",
+    "difficulty": "Easy",
+    "content": "Hi — Please review and sign the attached agreement to complete onboarding. Attachment: onboarding_agreement.pdf",
+    "answer": "phishing",
+    "feedback": "This is phishing because the sender domain mimics a known e-signature provider but is slightly off; unexpected attachments are risky.",
+    "hint": "Look for slight misspellings in the sender domain and be cautious with unexpected attachments."
+  },
+  {
+    "sender": "hr@startup-careers.com",
+    "subject": "Congratulations — You Were Selected!",
+    "type": "Email",
+    "difficulty": "Medium",
+    "content": "We reviewed your application and would like to schedule a quick onboarding call. Please confirm by clicking the calendar link below.",
+    "answer": "phishing",
+    "feedback": "This is likely phishing: unsolicited job offers that push you to click external scheduling links can be a recruitment for credential harvesting.",
+    "hint": "Check whether you applied for this role and whether the sender domain matches the company you applied to."
+  },
+  {
+    "sender": "+1 (312) 555-0199",
+    "subject": "Two-factor code: 482951",
+    "type": "Text Message",
+    "difficulty": "Medium",
+    "content": "Your verification code is 482951. If you did not request this, text STOP immediately.",
+    "answer": "phishing",
+    "feedback": "This is phishing/replay attack context: unsolicited 2FA codes can indicate someone is attempting to access your account and may try to social-engineer you to share it.",
+    "hint": "If you didn't initiate a login, do not share the code — treat unexpected 2FA codes as suspicious."
+  },
+  {
+    "sender": "billing@electric-utility.com",
+    "subject": "Overdue Balance Notice: Final Reminder",
+    "type": "Email",
+    "difficulty": "Medium",
+    "content": "Your account shows an overdue balance of $210. Pay now to avoid service interruption. Pay at: https://electric-utility-payments.net/your-account",
+    "answer": "phishing",
+    "feedback": "This is phishing because the payment link uses a non-official domain and the message pressures immediate payment to avoid service loss.",
+    "hint": "Look for mismatched domains and pressure to click a payment link; verify by logging into your utility account directly."
+  },
+  {
+    "sender": "calendar-invite@linkedin-notify.com",
+    "subject": "Interview Scheduled: Confirm Attendance",
+    "type": "Email",
+    "difficulty": "Hard",
+    "content": "A recruiter scheduled an interview and attached a meeting link requiring you to authenticate with your LinkedIn account to view. Click to confirm.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it requires authenticating with a third-party account via a suspicious link — a common credential harvesting tactic.",
+    "hint": "Legitimate platforms rarely request you re-authenticate through a random link in an email; inspect the link destination carefully."
+  },
+  {
+    "sender": "it-security@payroll.luc.edu",
+    "subject": "Payroll Account Reverification Needed",
+    "type": "Email",
+    "difficulty": "Hard",
+    "content": "Due to recent payroll system changes, all staff must reverify their direct deposit details using the secure portal. Failure to reverify may delay your next paycheck.",
+    "answer": "legitimate",
+    "feedback": "This appears legitimate because it references an internal payroll portal under a university subdomain and explains a plausible administrative update.",
+    "hint": "Check that the sender domain is an internal university subdomain and corroborate the change through an official HR page if unsure."
+  },
+  {
+    "sender": "+1 (773) 999-2020",
+    "subject": "Package delivery — sign here: https://bit.ly/3xZkLs",
+    "type": "Text Message",
+    "difficulty": "Easy",
+    "content": "Package delayed. Sign here to reschedule delivery: https://bit.ly/3xZkLs",
+    "answer": "phishing",
+    "feedback": "This is phishing because URL shorteners in unexpected delivery messages can hide malicious destinations; verify with the carrier directly.",
+    "hint": "Avoid clicking shortened URLs from unknown numbers; check the carrier's official tracking portal instead."
+  },
+  {
+    "sender": "accounts-payable@vendor-invoices.co",
+    "subject": "INVOICE 4721 — Immediate Payment Requested",
+    "type": "Email",
+    "difficulty": "Hard",
+    "content": "Please see the attached invoice for recent services and remit payment to the account listed. Attachment: invoice_4721.docx",
+    "answer": "phishing",
+    "feedback": "This is phishing because invoice scams commonly use attachments with macros or ask to change payment routing; the domain looks like a vendor impersonation.",
+    "hint": "If you weren't expecting an invoice, verify with the vendor by a known phone number before opening attachments or changing payment details."
+  },
+  {
+    "sender": "security-alert@appleid.apple.com",
+    "subject": "New Sign-in to Your Apple ID",
+    "type": "Email",
+    "difficulty": "Medium",
+    "content": "A new sign-in to your Apple ID occurred from a Windows device in Chicago. If this wasn't you, review your account immediately.",
+    "answer": "phishing",
+    "feedback": "This is likely phishing because legitimate Apple security emails use specific phrasing and official domains; check the full sender and link destinations.",
+    "hint": "Open your account via the official site (type the URL yourself) rather than clicking links in the message."
+  }
+  ,
+  {
+    "sender": "+1 (312) 555-0101",
+    "subject": "Account Locked",
+    "type": "Text Message",
+    "difficulty": "Easy",
+    "content": "Your bank account is locked. Call 1-800-555-0101 now to restore access.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it pressures immediate phone contact and comes from an unknown number; legitimate banks rarely give only a random SMS phone line.",
+    "hint": "Don't call numbers provided in unexpected texts; look up the official number yourself."
+  },
+  {
+    "sender": "noreply@security-alerts.com",
+    "subject": "Payment Declined — Verify Now",
+    "type": "Email",
+    "difficulty": "Easy",
+    "content": "URGENT: Your payment was declined. Verify billing immediately to avoid account suspension.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it uses urgency to push you to verify billing through unknown links or attachments.",
+    "hint": "If billing looks off, sign in to the service directly rather than following email links."
+  },
+  {
+    "sender": "+1 (312) 555-0202",
+    "subject": "Data Breach — Change Password",
+    "type": "Text Message",
+    "difficulty": "Hard",
+    "content": "Your data was found in a breach. Change your password now: http://secure-reset.example",
+    "answer": "phishing",
+    "feedback": "This is phishing because it uses fear of a breach and includes a suspicious link to collect credentials.",
+    "hint": "Treat unsolicited breach alerts with caution; visit trusted vendor sites directly."
+  },
+  {
+    "sender": "alert@company-payroll.net",
+    "subject": "Immediate: Payroll Hold",
+    "type": "Email",
+    "difficulty": "Hard",
+    "content": "Payroll on hold. Confirm bank details now to receive today's pay.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it pressures urgent financial action and may attempt to redirect payments to attacker-controlled accounts.",
+    "hint": "Verify payroll notices via official HR channels before providing banking information."
+  },
+  {
+    "sender": "+1 (312) 555-0303",
+    "subject": "Legal Action Filed",
+    "type": "Text Message",
+    "difficulty": "Hard",
+    "content": "Legal action filed against you. Contact attorney immediately to avoid arrest.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it uses fear of legal consequences to force rushed responses and payment or disclosure.",
+    "hint": "Don't act on threatening texts; verify claims with official court or attorney contacts."
+  },
+  {
+    "sender": "security@cloud-storage-update.com",
+    "subject": "Files Will Be Deleted",
+    "type": "Email",
+    "difficulty": "Hard",
+    "content": "Your files will be deleted in 1 hour unless you verify your account.",
+    "answer": "phishing",
+    "feedback": "This is phishing because it imposes a tight deadline to coerce clicking a malicious link or revealing credentials.",
+    "hint": "Check the sender domain and sign into your cloud provider directly to confirm any account actions."
+  }
 ]
