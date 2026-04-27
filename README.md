@@ -8,7 +8,7 @@ Start a local server from the project folder:
 
 ```bash
 python3 -m http.server 5501
-
+```
 ## Deployed URL
 https://celesteg15.github.io/COMP324-phish-alert-project/
 
