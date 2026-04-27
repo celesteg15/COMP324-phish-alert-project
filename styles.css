@@ -151,27 +151,27 @@ button.btn-legitimate.is-selected {
 }
 
 #difficulty-filter.filter-all {
-  border-color: #fff8e1;
-  background: #ffb300;
-  box-shadow: 0 0 0 2px rgba(255, 179, 0, 0.35);
+  border-color: #f3e5f5;
+  background: #ab47bc;
+  box-shadow: 0 0 0 2px rgba(171, 71, 188, 0.3);
 }
 
 #difficulty-filter.filter-easy {
-  border-color: #fff3e0;
-  background: #fb8c00;
-  box-shadow: 0 0 0 2px rgba(251, 140, 0, 0.35);
+  border-color: #ede7f6;
+  background: #7e57c2;
+  box-shadow: 0 0 0 2px rgba(126, 87, 194, 0.35);
 }
 
 #difficulty-filter.filter-medium {
-  border-color: #ffe0b2;
-  background: #e65100;
-  box-shadow: 0 0 0 2px rgba(230, 81, 0, 0.4);
+  border-color: #d1c4e9;
+  background: #5e35b1;
+  box-shadow: 0 0 0 2px rgba(94, 53, 177, 0.4);
 }
 
 #difficulty-filter.filter-hard {
-  border-color: #ffd180;
-  background: #bf360c;
-  box-shadow: 0 0 0 2px rgba(191, 54, 12, 0.45);
+  border-color: #b39ddb;
+  background: #311b92;
+  box-shadow: 0 0 0 2px rgba(49, 27, 146, 0.45);
 }
 
 /* Accessibility: visible focus outline for keyboard users */
