@@ -130,7 +130,7 @@ button.btn-phishing {
 
 button.btn-phishing.is-selected {
   border-color: #b71c1c;
-  box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.35);
+  box-shadow: 0 0 0 3px rgba(183, 28, 28, 0.55);
 }
 
 button.btn-legitimate {
@@ -141,7 +141,7 @@ button.btn-legitimate {
 
 button.btn-legitimate.is-selected {
   border-color: #1b5e20;
-  box-shadow: 0 0 0 2px rgba(67, 160, 71, 0.35);
+  box-shadow: 0 0 0 3px rgba(27, 94, 32, 0.5);
 }
 
 /* Difficulty filter accent by selection */
@@ -290,7 +290,6 @@ button.btn-legitimate.is-selected {
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 3px;
-  font-weight: 800;
 }
 
 .points-modal {
