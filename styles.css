@@ -251,8 +251,8 @@ button.btn-legitimate.is-selected {
 
 /* Make the instruction / scoring rules card more attention-grabbing */
 .scoring-rules {
-  background: #fff0f6; /* very light pink */
-  border-color: #ffd6e8;
+  background: #ede7f6; /* Light purple background for instructions */
+  border-color: #7e57c2;  /* Purple border to match the theme */
 }
 
 /* Win modal tweaks share the points modal visuals */
