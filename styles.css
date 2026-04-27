@@ -123,25 +123,25 @@ button.is-selected {
 
 /* Answer choice colors */
 button.btn-phishing {
-  background: #ffebee;
-  border-color: #e53935;
-  color: #b71c1c;
+  background: #d2d8f6;
+  border-color: #3949ab;
+  color: #1a237e;
 }
 
 button.btn-phishing.is-selected {
-  border-color: #b71c1c;
-  box-shadow: 0 0 0 3px rgba(183, 28, 28, 0.55);
+  border-color: #1a237e;
+  box-shadow: 0 0 0 3px rgba(57, 73, 171, 0.5);
 }
 
 button.btn-legitimate {
-  background: #e8f5e9;
-  border-color: #43a047;
-  color: #1b5e20;
+  background: #eac0f1;
+  border-color: #871da4;
+  color: #4a148c;
 }
 
 button.btn-legitimate.is-selected {
-  border-color: #1b5e20;
-  box-shadow: 0 0 0 3px rgba(27, 94, 32, 0.5);
+  border-color: #4a148c;
+  box-shadow: 0 0 0 3px rgba(142, 36, 170, 0.5);
 }
 
 /* Difficulty filter accent by selection */
@@ -151,9 +151,9 @@ button.btn-legitimate.is-selected {
 }
 
 #difficulty-filter.filter-all {
-  border-color: #8792d1;
+  border-color: #d4e1ff;
   background: #aacffb;
-  box-shadow: 0 0 0 2px rgba(92, 107, 192, 0.25);
+  box-shadow: 0 0 0 2px rgba(113, 137, 232, 0.759);
 }
 
 #difficulty-filter.filter-easy {
