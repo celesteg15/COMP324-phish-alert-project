@@ -151,29 +151,28 @@ button.btn-legitimate.is-selected {
 }
 
 #difficulty-filter.filter-all {
-  border-color: #f3e5f5;
-  background: #ab47bc;
-  box-shadow: 0 0 0 2px rgba(171, 71, 188, 0.3);
+  border-color: #8792d1;
+  background: #aacffb;
+  box-shadow: 0 0 0 2px rgba(92, 107, 192, 0.25);
 }
 
 #difficulty-filter.filter-easy {
-  border-color: #ede7f6;
-  background: #7e57c2;
-  box-shadow: 0 0 0 2px rgba(126, 87, 194, 0.35);
+  border-color: #2e7d32;
+  background: #e8f5e9;
+  box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.3);
 }
 
 #difficulty-filter.filter-medium {
-  border-color: #d1c4e9;
-  background: #5e35b1;
-  box-shadow: 0 0 0 2px rgba(94, 53, 177, 0.4);
+  border-color: #f9a825;
+  background: #fff8e1;
+  box-shadow: 0 0 0 2px rgba(249, 168, 37, 0.35);
 }
 
 #difficulty-filter.filter-hard {
-  border-color: #b39ddb;
-  background: #311b92;
-  box-shadow: 0 0 0 2px rgba(49, 27, 146, 0.45);
+  border-color: #c62828;
+  background: #ffebee;
+  box-shadow: 0 0 0 2px rgba(198, 40, 40, 0.28);
 }
-
 /* Accessibility: visible focus outline for keyboard users */
 :focus-visible {
   outline: 3px solid #005fcc;
