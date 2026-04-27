@@ -58,21 +58,12 @@ The app currently uses these resilience patterns in the data-loading flow:
 - Show win modal when target points are reached
 
 ## Known issues / limitations
-- Timer state must be observed carefully during slow manual testing.
-- Difficulty changes reset the visible question timer.
-- Quiz progress is not persisted after page refresh.
 
-## Module map
-- `index.html` — main page structure and semantic layout
-- `styles.css` — styling, focus states, buttons, feedback, and modals
-- `main.js` — app startup, event wiring, quiz flow, filtering, and submission logic
-- `api.js` — scenario loading, timeout handling, cancellation, and data validation
-- `state.js` — shared state, selectors, timer settings, and scoring helpers
-- `render.js` — rendering UI for loading, error, empty, and quiz states
-- `dom.js` — centralized DOM element references
-- `pointsModal.js` — per-question points modal and win modal behavior
-- `components/answerChoices.js` — answer choice rendering component
-- `data/scenarios.json` — scenario data used by the quiz
+- Quiz progress does not persist after refreshing the page.
+- The app uses a local JSON dataset instead of a live phishing API.
+- The project does not include user accounts, saved profiles, leaderboards, or long-term score tracking.
+- Accessibility was tested manually, but a full formal screen-reader audit was not completed.
+
 
 ## Component contracts
 
@@ -104,14 +95,37 @@ The app currently uses these resilience patterns in the data-loading flow:
 - Handles modal open/close behavior for the points modal and win modal
 
 ## Testing summary
-- Total test cases: 12
-- Passed: 12
-- Failed: 0
-- Bugs discovered: 3
-- Bugs fixed: 3
-- Smoke test completed before deployment: yes
+
+The project was tested through manual browser testing, feature-level checks, smoke testing, accessibility checks, and GitHub Pages deployment verification.
+
+- Original structured test cases: 12
+- Additional accessibility test cases: 3
+- Total documented test cases: 15
+- Testing categories covered: success paths, edge cases, failure modes, accessibility, and deployment
+- Smoke test completed before final demo: yes
+- Bug fixes were re-tested after changes to confirm the app still worked correctly
 
 ## Team Members
 
-- Alexa:
-- Celeste:
+- Alexa Solorzano — Project concept development, scenario writing, modular code refactoring, feature implementation, testing, bug fixes, timer/scoring behavior, modal behavior, and final project polish.
+- Celeste Gonzalez — Documentation, presentation design, state/data feature implementation, test execution, README/publication readiness, GitHub Pages deployment verification, and final report support.
+
+
+## Accessibility
+
+PhishQuiz includes several accessibility-supporting features:
+
+- Semantic HTML structure with clear headings and sections
+- Labeled difficulty dropdown
+- Clearly named buttons for Phishing, Legitimate, Submit, Next, Hint, and modal actions
+- Visible focus styling for keyboard users
+- Keyboard-reachable controls through normal tab navigation
+- `aria-pressed` behavior on answer buttons to show which answer is selected
+- `aria-live` regions for dynamic updates such as the timer, scenario content, feedback, and points message
+- Modal dialogs for points and win states with labeled dialog titles
+- Points and win modals can be dismissed through normal controls, including buttons and the Escape key
+
+Accessibility was also tested through three additional manual test cases:
+- TC-13: Keyboard navigation
+- TC-14: Dynamic feedback and readable updates
+- TC-15: Modal behavior
